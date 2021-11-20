@@ -212,13 +212,6 @@ screens = [
                     fontsize=24,
                     padding=0,
                 ),
-                # widget.Image(filename="~/.config/qtile/gruv-arch(1).png", margin=2),
-                # widget.TextBox(
-                #     " ",
-                #     # foreground=colors["white"],
-                #     fontsize=30,
-                #     background=colors["black"],
-                # ),
                 widget.GroupBox(
                     block_highlight_text_color=colors["black"],
                     highlight_method="line",
