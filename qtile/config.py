@@ -26,8 +26,6 @@
 
 from typing import List
 
-# from widgets.MangaDex import MangaDex  # noqa: F401
-
 import os.path
 from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
