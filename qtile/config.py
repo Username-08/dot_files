@@ -120,6 +120,10 @@ keys = [
         ),
         desc="change wallpaper",
     ),
+    # Change the volume if our keyboard has keys
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 -q set Master 2dB+")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 -q set Master 2dB-")),
+    Key([], "XF86AudioMute", lazy.spawn("amixer set Master toggle")),
 ]
 
 # groups = [Group(i, label="⬤") for i in "12345"]
@@ -240,8 +244,9 @@ screens = [
                     fontsize=24,
                     padding=0,
                 ),
-                widget.TextBox("  "),
-                widget.WindowName(format="{name}", max_chars=100),
+                # widget.TextBox("  "),
+                # widget.WindowName(format="{name}", max_chars=100),
+                widget.Spacer(),
                 widget.TextBox(
                     text="",
                     foreground=colors["black"],
@@ -250,7 +255,7 @@ screens = [
                     fontsize=24,
                     padding=0,
                 ),
-                widget.TextBox(" ", fontsize=24, background=colors["black"]),
+                widget.TextBox(" ", fontsize=20, background=colors["black"]),
                 widget.Clock(
                     format="%H:%M:%S", fontsize=16, background=colors["black"]
                 ),
@@ -271,14 +276,6 @@ screens = [
                     font="JetBrainsMono Nerd Font",
                     fontsize=24,
                     padding=0,
-                ),
-                widget.Pomodoro(
-                    length_long_break=60,
-                    color_active=colors["white"],
-                    color_inactive=colors["white"],
-                    color_break=colors["yellow"],
-                    background=colors["black"],
-                    foreground=colors["white"],
                 ),
                 # widget.TextBox("   ", background=colors["black"]),
                 widget.TextBox(
@@ -426,7 +423,7 @@ screens = [
                 widget.TextBox("   "),
             ],
             24,
-            margin=8,
+            margin=[8, 0, 8, 0],
             opacity=0.9,
             background="#32302f",
         ),
