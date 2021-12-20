@@ -10,7 +10,9 @@ set hidden
 set autoread
 set mouse=a
 
-" tnoremap <Esc> <C-\><C-n>
+set cursorline 
+hi CursorLineNr guifg=#d3869b
+
 
 set tabstop=4
 set softtabstop=4
@@ -33,6 +35,10 @@ autocmd FileType python nmap \r :w<CR>:split term://python3 %<CR>
 call plug#begin('~/.vim/plugged')
 
 Plug 'eddyekofo94/gruvbox-flat.nvim'
+Plug 'morhetz/gruvbox'
+Plug 'chrisbra/Colorizer'
+Plug 'puremourning/vimspector'
+Plug 'neoclide/coc.nvim'
 Plug 'windwp/nvim-autopairs'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -47,7 +53,7 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'hoob3rt/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'rinx/lspsaga.nvim'
+Plug 'tami5/lspsaga.nvim'
 Plug 'sbdchd/neoformat'
 Plug 'TimUntersberger/neogit'
 
@@ -62,7 +68,8 @@ colorscheme gruvbox-flat
 
 set splitbelow
 set switchbuf=newtab
-nnoremap \\ :Lspsaga open_floaterm<CR>
+nnoremap \\ :spl<CR> :term<CR>
+" source $HOME/.config/nvim/plug-config/coc.vim
 source $HOME/.config/nvim/plug-config/telescope-config.rc.vim
 source $HOME/.config/nvim/plug-config/lsp-config.vim
 source $HOME/.config/nvim/plug-config/neoformat.rc.vim
@@ -75,6 +82,7 @@ luafile $HOME/.config/nvim/plug-config/lualine-config.lua
 luafile $HOME/.config/nvim/plug-config/lspsaga-config.lua
 luafile $HOME/.config/nvim/plug-config/autopair-config.lua
 luafile $HOME/.config/nvim/plug-config/rust-config.lua
+
 " mapping leader key
 let g:mapleader = " "
 " remap for lspsaga
@@ -91,3 +99,7 @@ nnoremap <leader>ca :Lspsaga code_action<CR>
 nnoremap <leader>cra :Lspsaga range_code_action<CR>
 nnoremap <leader>rn :Lspsaga rename<CR>
 
+hi DiagnosticUnderlineError gui=undercurl
+hi DiagnosticUnderlineHint gui=undercurl
+hi DiagnosticUnderlineWarn gui=undercurl
+hi CursorLine guibg=None
