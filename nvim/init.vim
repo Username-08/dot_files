@@ -13,6 +13,7 @@ set mouse=a
 set cursorline 
 hi CursorLineNr guifg=#d3869b
 
+" tnoremap <Esc> <C-\><C-n>
 
 set tabstop=4
 set softtabstop=4
@@ -38,8 +39,12 @@ Plug 'eddyekofo94/gruvbox-flat.nvim'
 Plug 'morhetz/gruvbox'
 Plug 'chrisbra/Colorizer'
 Plug 'puremourning/vimspector'
-Plug 'neoclide/coc.nvim'
+" Plug 'tpope/vim-fugitive'
+" Plug 'neoclide/coc.nvim'
 Plug 'windwp/nvim-autopairs'
+" Plug 'jackguo380/vim-lsp-cxx-highlight'
+" Plug 'mxw/vim-jsx'
+" Plug 'bfrg/vim-cpp-modern'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/nvim-cmp'
@@ -52,10 +57,14 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'hoob3rt/lualine.nvim'
+" Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
+" Plug 'glepnir/lspsaga.nvim'
 Plug 'tami5/lspsaga.nvim'
 Plug 'sbdchd/neoformat'
 Plug 'TimUntersberger/neogit'
+" Plug 'pangloss/vim-javascript'
+" Plug 'mhartington/formatter.nvim'
 
 call plug#end()
 
@@ -74,6 +83,7 @@ source $HOME/.config/nvim/plug-config/telescope-config.rc.vim
 source $HOME/.config/nvim/plug-config/lsp-config.vim
 source $HOME/.config/nvim/plug-config/neoformat.rc.vim
 luafile $HOME/.config/nvim/plug-config/treesitter-config.lua
+" luafile $HOME/.config/nvim/plug-config/compe-config.lua
 luafile $HOME/.config/nvim/plug-config/nvim-cmp.lua
 luafile $HOME/.config/nvim/plug-config/python-config.lua
 luafile $HOME/.config/nvim/plug-config/javascript-config.lua
@@ -82,7 +92,12 @@ luafile $HOME/.config/nvim/plug-config/lualine-config.lua
 luafile $HOME/.config/nvim/plug-config/lspsaga-config.lua
 luafile $HOME/.config/nvim/plug-config/autopair-config.lua
 luafile $HOME/.config/nvim/plug-config/rust-config.lua
+" luafile $HOME/.config/nvim/plug-config/formattr-config.lua
+" luafile $HOME/.config/nvim/plug-config/denols-config.lua
 
+" nnoremap <space>e :CocCommand explorer --preset floating<CR> 
+" remap space to confirm compe 
+" inoremap <silent><expr> <Space>      compe#confirm('<Space>')
 " mapping leader key
 let g:mapleader = " "
 " remap for lspsaga
