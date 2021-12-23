@@ -194,7 +194,6 @@ colors = dict(
     aqua="#6a8e5f",
     white="#d2b48c",
     black="#504945",
-    # black="#3c3836",
 )
 
 widget_defaults = dict(
@@ -218,13 +217,6 @@ screens = [
                     fontsize=21,
                     padding=0,
                 ),
-                # widget.Image(filename="~/.config/qtile/gruv-arch(1).png", margin=2),
-                # widget.TextBox(
-                #     " ",
-                #     # foreground=colors["white"],
-                #     fontsize=30,
-                #     background=colors["black"],
-                # ),
                 widget.GroupBox(
                     block_highlight_text_color=colors["black"],
                     highlight_method="text",
@@ -279,38 +271,10 @@ screens = [
                 ),
                 widget.Spacer(),
                 widget.TextBox("    "),
-                # widget.Systray(icon_size=21, background=colors["black"]),
                 widget.TextBox("    "),
                 widget.TextBox(
                     text="",
                     foreground=colors["black"],
-                    # background=colors[0],
-                    font="JetBrainsMono Nerd Font",
-                    fontsize=21,
-                    padding=0,
-                ),
-                widget.Pomodoro(
-                    length_long_break=60,
-                    color_active=colors["white"],
-                    color_inactive=colors["white"],
-                    color_break=colors["yellow"],
-                    background=colors["black"],
-                    foreground=colors["white"],
-                ),
-                # widget.TextBox("   ", background=colors["black"]),
-                widget.TextBox(
-                    text="",
-                    foreground=colors["black"],
-                    # background=colors[0],
-                    font="JetBrainsMono Nerd Font",
-                    fontsize=21,
-                    padding=0,
-                ),
-                widget.TextBox("    "),
-                widget.TextBox(
-                    text="",
-                    foreground=colors["black"],
-                    # background=colors[0],
                     font="JetBrainsMono Nerd Font",
                     fontsize=21,
                     padding=0,
@@ -319,7 +283,6 @@ screens = [
                 widget.TextBox(
                     text="",
                     foreground=colors["black"],
-                    # background=colors[0],
                     font="JetBrainsMono Nerd Font",
                     fontsize=21,
                     padding=0,
@@ -328,7 +291,6 @@ screens = [
                 widget.TextBox(
                     text="",
                     foreground=colors["black"],
-                    # background=colors[0],
                     font="JetBrainsMono Nerd Font",
                     fontsize=21,
                     padding=0,
@@ -354,7 +316,6 @@ screens = [
                 widget.TextBox(
                     text="",
                     foreground=colors["black"],
-                    # background=colors[0],
                     font="JetBrainsMono Nerd Font",
                     fontsize=21,
                     padding=0,
@@ -363,7 +324,6 @@ screens = [
                 widget.TextBox(
                     text="",
                     foreground=colors["black"],
-                    # background=colors[0],
                     font="JetBrainsMono Nerd Font",
                     fontsize=21,
                     padding=0,
@@ -382,7 +342,6 @@ screens = [
                 widget.TextBox(
                     text="",
                     foreground=colors["black"],
-                    # background=colors[0],
                     font="JetBrainsMono Nerd Font",
                     fontsize=21,
                     padding=0,
@@ -391,7 +350,6 @@ screens = [
                 widget.TextBox(
                     text="",
                     foreground=colors["black"],
-                    # background=colors[0],
                     font="JetBrainsMono Nerd Font",
                     fontsize=21,
                     padding=0,
@@ -406,7 +364,6 @@ screens = [
                 widget.TextBox(
                     text="",
                     foreground=colors["black"],
-                    # background=colors[0],
                     font="JetBrainsMono Nerd Font",
                     fontsize=21,
                     padding=0,
@@ -415,7 +372,6 @@ screens = [
                 widget.TextBox(
                     text="",
                     foreground=colors["black"],
-                    # background=colors[0],
                     font="JetBrainsMono Nerd Font",
                     fontsize=21,
                     padding=0,
@@ -429,7 +385,6 @@ screens = [
                 widget.TextBox(
                     text="",
                     foreground=colors["black"],
-                    # background=colors[0],
                     font="JetBrainsMono Nerd Font",
                     fontsize=21,
                     markup=False,
@@ -479,6 +434,7 @@ floating_layout = layout.Floating(
         # Match(wm_class='Thunar'),  # Thunar file browser
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
+        Match(title="Tor Browser"),  # Tor-Browser
     ],
     border_focus="#98971a",
     border_normal="504945",
