@@ -5,6 +5,19 @@ nnoremap <silent> <space>r <Cmd>Telescope find_files<CR>
 lua <<EOF
 local actions = require('telescope.actions')
 require('telescope').setup{
+extensions = {
+    file_browser = {
+      -- theme = "",
+      mappings = {
+        ["i"] = {
+          -- your custom insert mode mappings
+        },
+        ["n"] = {
+          -- your custom normal mode mappings
+        },
+      },
+    },
+  },
 defaults = {
     file_ignore_patterns={"node_modules/.", "dist/.", "target/."},
     mappings = {
@@ -14,4 +27,6 @@ defaults = {
         }
     },
 }
+
+require("telescope").load_extension "file_browser"
 EOF

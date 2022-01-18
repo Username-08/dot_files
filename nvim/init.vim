@@ -53,6 +53,7 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -77,7 +78,7 @@ colorscheme gruvbox-flat
 
 set splitbelow
 set switchbuf=newtab
-nnoremap \\ :spl<CR> :term<CR>
+nnoremap \\ :spl<CR>:term<CR>
 " source $HOME/.config/nvim/plug-config/coc.vim
 source $HOME/.config/nvim/plug-config/telescope-config.rc.vim
 source $HOME/.config/nvim/plug-config/lsp-config.vim
@@ -118,3 +119,5 @@ hi DiagnosticUnderlineError gui=undercurl
 hi DiagnosticUnderlineHint gui=undercurl
 hi DiagnosticUnderlineWarn gui=undercurl
 hi CursorLine guibg=None
+hi CmpItemAbbr guibg=#282828 guifg=#7c6f64
+hi CmpItemKind guibg=#282828 guifg=#ea6962
