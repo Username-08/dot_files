@@ -24,25 +24,25 @@ class BatteryText(ThreadPoolText):
             return None
 
         if self.battery[2]:
-            return f" {int(self.battery[0])}% "
+            return f"  {int(self.battery[0])}% "
         else:
             if self.battery[0] <= 10:
-                return f" {int(self.battery[0])}% "
+                return f"  {int(self.battery[0])}% "
             elif self.battery[0] <= 20:
-                return f" {int(self.battery[0])}% "
+                return f"  {int(self.battery[0])}% "
             elif self.battery[0] <= 30:
-                return f" {int(self.battery[0])}% "
+                return f"  {int(self.battery[0])}% "
             elif self.battery[0] <= 40:
-                return f" {int(self.battery[0])}% "
+                return f"  {int(self.battery[0])}% "
             elif self.battery[0] <= 50:
-                return f" {int(self.battery[0])}% "
+                return f"  {int(self.battery[0])}% "
             elif self.battery[0] <= 60:
-                return f" {int(self.battery[0])}% "
+                return f"  {int(self.battery[0])}% "
             elif self.battery[0] <= 70:
-                return f" {int(self.battery[0])}% "
+                return f"  {int(self.battery[0])}% "
             elif self.battery[0] <= 80:
-                return f" {int(self.battery[0])}% "
+                return f"  {int(self.battery[0])}% "
             elif self.battery[0] <= 90:
-                return f" {int(self.battery[0])}% "
+                return f"  {int(self.battery[0])}% "
             else:
-                return f" {int(self.battery[0])}% "
+                return f"  {int(self.battery[0])}% "
