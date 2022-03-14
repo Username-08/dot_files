@@ -31,25 +31,25 @@ nnoremap <silent> <C-p> <cmd>lua vim.diagnostic.goto_next()<CR>
 " hi LspDiagnosticsUnderlineHint guifg=NONE ctermfg=NONE cterm=underline gui=underline
 
 lua << EOF
--- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
---  vim.lsp.diagnostic.on_publish_diagnostics, {
---    -- Enable underline, use default values
---    underline = true,
---    -- Enable virtual text only on Warning or above, override spacing to 2
---    virtual_text = {
---      spacing = 2,
---      severity_limit = "Error",
---    },
---  }
--- )
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+ vim.lsp.diagnostic.on_publish_diagnostics, {
+   -- Enable underline, use default values
+   underline = true,
+   -- Enable virtual text only on Warning or above, override spacing to 2
+   virtual_text = {
+     spacing = 2,
+     severity_limit = "Error",
+   },
+ }
+)
 
-vim.diagnostic.config({
-  virtual_text = {severity="Error"},
-  signs = true,
-  underline = true,
-  update_in_insert = false,
-  severity_sort = false,
-})
+-- vim.diagnostic.config({
+--   virtual_text = {severity=vim.diagnostic.severity.ERROR},
+--   signs = true,
+--   underline = true,
+--   update_in_insert = false,
+--   severity_sort = false,
+-- })
 
 local signs = { Error = "ᐅ", Warn = "ᐅ", Hint = "", Info = "" }
 for type, icon in pairs(signs) do
