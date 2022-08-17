@@ -1,31 +1,33 @@
-nnoremap <silent> <space>e <Cmd>Telescope file_browser<CR>
-nnoremap <silent> <space>f <Cmd>Telescope buffers<CR>
-nnoremap <silent> <space>r <Cmd>Telescope find_files<CR>
+nnoremap <silent> <space>e :Telescope file_browser<CR>
+nnoremap <silent> <space>f :Telescope buffers<CR>
+nnoremap <silent> <space>o :Telescope find_files<CR>
 
 lua <<EOF
 local actions = require('telescope.actions')
 require('telescope').setup{
-extensions = {
-    file_browser = {
-      -- theme = "",
-      mappings = {
-        ["i"] = {
-          -- your custom insert mode mappings
-        },
-        ["n"] = {
-          -- your custom normal mode mappings
+    extensions = {
+        file_browser = {
+            respect_gitignore = false,
+
+          -- theme = "",
+          mappings = {
+            ["i"] = {
+              -- your custom insert mode mappings
+            },
+            ["n"] = {
+              -- your custom normal mode mappings
+            },
+          },
         },
       },
+    defaults = {
+        file_ignore_patterns={"node_modules/.", "dist/.", "target/."},
     },
-  },
-defaults = {
-    file_ignore_patterns={"node_modules/.", "dist/.", "target/."},
-    mappings = {
-        n = {
-            ["q"] = actions.close
-            }
-        }
-    },
+    pickers = {
+        find_files = {
+            find_command = {"fd", "--type", "f", "--no-ignore-vcs"}
+        },
+    }
 }
 
 require("telescope").load_extension "file_browser"

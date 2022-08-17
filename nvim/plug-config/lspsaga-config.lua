@@ -1,12 +1,20 @@
 local saga = require 'lspsaga'
 
-saga.init_lsp_saga {
-    error_sign = 'ᐅ',
-    warn_sign = 'ᐅ',
-    hint_sign = '',
-    code_action_prompt = {
-        enable = false
+-- change the lsp symbol kind
+-- local kind = require('lspsaga.lspkind')
+-- kind[type_number][2] = icon -- see lua/lspsaga/lspkind.lua
+
+-- use custom config
+saga.init_lsp_saga({
+    -- put modified options in there
+    border_style = "rounded",
+    show_diagnostic_source = false,
+    code_action_icon = "",
+    code_action_lightbulb = {
+        enable = true,
+        sign = false,
+        enable_in_insert = true,
+        sign_priority = 20,
+        virtual_text = true,
     },
-    infor_sign = 'ᐅ',
-    border_style = "round",
-}
+})

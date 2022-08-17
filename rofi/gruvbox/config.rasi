@@ -74,7 +74,7 @@ element-text {
 
 element selected {
 	background-color:               @fg;
-	text-color:                     #32302f;
+	text-color:                     @bg;
 	border-radius:                  6px;
 }
 
