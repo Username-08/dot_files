@@ -27,6 +27,8 @@ autocmd FileType typescriptreact setlocal shiftwidth=2 tabstop=2 softtabstop=2 s
 autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2 smartindent
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2 smartindent
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2 smartindent
+autocmd FileType nasm highlight nasmGen32Register guifg=#89b482
+autocmd FileType nasm highlight nasmGen64Register guifg=#89b482
 au BufRead,BufNewFile *.graphql,*.graphqls,*.gql setfiletype graphql
 au BufRead,BufNewFile *.fish setfiletype fish
 set expandtab
