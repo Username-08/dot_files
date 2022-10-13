@@ -22,7 +22,7 @@ class VolumeText(ThreadPoolText):
         self.client = alsaaudio.Mixer()
         self.volume = self.client.getvolume()
 
-        if self.volume[0] <= 10:
+        if self.volume[0] == 0:
             return f"婢"
         elif self.volume[0] <= 50:
             return f"奔"

@@ -8,7 +8,7 @@ local saga = require 'lspsaga'
 saga.init_lsp_saga({
     -- put modified options in there
     border_style = "rounded",
-    show_diagnostic_source = false,
+    -- show_diagnostic_source = false,
     code_action_icon = "",
     code_action_lightbulb = {
         enable = true,

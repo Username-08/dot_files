@@ -44,13 +44,11 @@ autocmd FileType rust nmap \r :w<CR>:botright split term://cargo run<CR>:resize 
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'andweeb/presence.nvim'
+Plug 'elkowar/yuck.vim'
 Plug 'eddyekofo94/gruvbox-flat.nvim'
 Plug 'numToStr/Comment.nvim'
 Plug 'sainnhe/everforest'
 Plug 'rafamadriz/friendly-snippets'
-" Plug 'lervag/vimtex'
-" Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 
@@ -58,13 +56,7 @@ Plug 'alvan/vim-closetag'
 Plug 'sainnhe/gruvbox-material'
 Plug 'chrisbra/Colorizer'
 Plug 'puremourning/vimspector'
-" Plug 'tpope/vim-fugitive'
-" Plug 'neoclide/coc.nvim'
-"
 Plug 'windwp/nvim-autopairs'
-" Plug 'jackguo380/vim-lsp-cxx-highlight'
-" Plug 'mxw/vim-jsx'
-" Plug 'bfrg/vim-cpp-modern'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/nvim-cmp'
@@ -78,14 +70,24 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'hoob3rt/lualine.nvim'
-" Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'glepnir/lspsaga.nvim'
-" Plug 'tami5/lspsaga.nvim'
 Plug 'sbdchd/neoformat'
 Plug 'TimUntersberger/neogit'
+
+" Plug 'andweeb/presence.nvim'
 " Plug 'pangloss/vim-javascript'
 " Plug 'mhartington/formatter.nvim'
+" Plug 'lervag/vimtex'
+" Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+" Plug 'ryanoasis/vim-devicons'
+" Plug 'tami5/lspsaga.nvim'
+" Plug 'jackguo380/vim-lsp-cxx-highlight'
+" Plug 'mxw/vim-jsx'
+" Plug 'bfrg/vim-cpp-modern'
+" Plug 'tpope/vim-fugitive'
+" Plug 'neoclide/coc.nvim'
+"
 
 call plug#end()
 
@@ -152,6 +154,7 @@ hi DiagnosticUnderlineWarn gui=undercurl
 hi CursorLine guibg=None
 
 highlight! CmpPmenuBorder guifg=#7c6f64 guibg=#32302f
+highlight! CmpPmenu guibg=#32302f
 hi CmpItemKindEnum guifg=#d8a657
 hi CmpItemKindEnumMember guifg=#d8a657
 hi CmpItemKindClass guifg=#d8a657

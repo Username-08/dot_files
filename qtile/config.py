@@ -122,6 +122,9 @@ keys = [
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 -q set Master 2dB+")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 -q set Master 2dB-")),
     Key([], "XF86AudioMute", lazy.spawn("amixer set Master toggle")),
+    # brightness
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-")),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +5%")),
     # toggle floating mode for focused window
     Key([mod], "v", lazy.window.toggle_floating(), desc="Toggle floating"),
 ]
@@ -164,8 +167,8 @@ layouts = [
         margin=5,
         border_on_single=True,
         border_width=3,
-        border_focus="#98971a",
-        border_normal="504945",
+        border_focus="#5a524c",
+        border_normal="484341",
     ),
     # layout.MonadTall(
     #     margin=5,
@@ -234,8 +237,8 @@ screens = [
                     highlight_color=colors["white"],
                     margin_y=3,
                     background=colors["black"],
-                    font="JetBrainsMono",
-                    fontsize=16,
+                    font="JetBrainsMono Nerd Font",
+                    fontsize=15,
                     spacing=10,
                 ),
                 widget.TextBox(
@@ -259,7 +262,7 @@ screens = [
                 ),
                 widget.TextBox(
                     " ",
-                    fontsize=19,
+                    fontsize=18,
                     background=colors["black"],
                     foreground=colors["white"],
                     font="JetBrainsMono Nerd Font",
@@ -281,33 +284,33 @@ screens = [
                 widget.Spacer(),
                 widget.TextBox("    "),
                 # widget.Systray(icon_size=21, background=colors["black"]),
-                widget.TextBox("    "),
-                widget.TextBox(
-                    text="",
-                    foreground=colors["black"],
-                    # background=colors[0],
-                    font="JetBrainsMono Nerd Font",
-                    fontsize=21,
-                    padding=0,
-                ),
-                widget.Pomodoro(
-                    length_long_break=60,
-                    color_active=colors["white"],
-                    color_inactive=colors["white"],
-                    color_break=colors["yellow"],
-                    background=colors["black"],
-                    foreground=colors["white"],
-                ),
-                # widget.TextBox("   ", background=colors["black"]),
-                widget.TextBox(
-                    text="",
-                    foreground=colors["black"],
-                    # background=colors[0],
-                    font="JetBrainsMono Nerd Font",
-                    fontsize=21,
-                    padding=0,
-                ),
-                widget.TextBox("    "),
+                # widget.TextBox("    "),
+                # widget.TextBox(
+                #     text="",
+                #     foreground=colors["black"],
+                #     # background=colors[0],
+                #     font="JetBrainsMono Nerd Font",
+                #     fontsize=21,
+                #     padding=0,
+                # ),
+                # widget.Pomodoro(
+                #     length_long_break=60,
+                #     color_active=colors["white"],
+                #     color_inactive=colors["white"],
+                #     color_break=colors["yellow"],
+                #     background=colors["black"],
+                #     foreground=colors["white"],
+                # ),
+                # # widget.TextBox("   ", background=colors["black"]),
+                # widget.TextBox(
+                #     text="",
+                #     foreground=colors["black"],
+                #     # background=colors[0],
+                #     font="JetBrainsMono Nerd Font",
+                #     fontsize=21,
+                #     padding=0,
+                # ),
+                # widget.TextBox("    "),
                 widget.TextBox(
                     text="",
                     foreground=colors["black"],
@@ -339,6 +342,7 @@ screens = [
                     background=colors["black"],
                     foreground=colors["blue"],
                     fontsize=24,
+                    font="JetBrainsMono",
                 ),
                 widget.TextBox(
                     " ",
@@ -374,6 +378,7 @@ screens = [
                     fontsize=15,
                     background=colors["black"],
                     foreground=colors["green"],
+                    font="JetBrainsMono Nerd Font",
                 ),
                 widget.Memory(
                     format="{MemUsed: .0f} MB",
@@ -400,7 +405,7 @@ screens = [
                 VolumeText(
                     4,
                     background=colors["black"],
-                    fontsize=21,
+                    fontsize=18,
                     font="JetBrainsMono Nerd Font",
                     foreground=colors["yellow"],
                 ),
@@ -441,7 +446,7 @@ screens = [
                 widget.TextBox("   "),
             ],
             25,
-            margin=[8, 0, 6, 0],
+            margin=[9, 0, 4, 0],
             opacity=0.9,
             background="#32302f",
         ),
@@ -484,8 +489,8 @@ floating_layout = layout.Floating(
         Match(title="pinentry"),  # GPG key password entry
         Match(title="Tor Browser"),  # Tor-Browser
     ],
-    border_focus="#98971a",
-    border_normal="504945",
+    border_focus="#5a524c",
+    border_normal="484341",
     border_width=3,
 )
 auto_fullscreen = True
