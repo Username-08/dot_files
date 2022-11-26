@@ -1,6 +1,6 @@
 nnoremap <silent> <space>e :Telescope file_browser<CR>
 nnoremap <silent> <space>f :Telescope buffers<CR>
-nnoremap <silent> <space>o :Telescope find_files<CR>
+nnoremap <silent> <space>p :Telescope find_files<CR>
 
 lua <<EOF
 local actions = require('telescope.actions')

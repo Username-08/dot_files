@@ -55,9 +55,9 @@
 
 ;; emacs-application-framework
 (package! emacs-application-framework
-:recipe (:host github :repo "emacs-eaf/emacs-application-framework"))
+          :recipe (:host github :repo "emacs-eaf/emacs-application-framework"))
 
-(package! everforest-hard-dark-theme
-  :recipe (:repo "https://git.sr.ht/~theorytoe/everforest-hard-dark-theme"))
-  
+;; (package! everforest-hard-dark-theme
+;;   :recipe (:repo "https://git.sr.ht/~theorytoe/everforest-hard-dark-theme"))
+
 ;(use-package! 'everforest-hard-dark')

@@ -11,7 +11,7 @@ set autoread
 set mouse=a
 set guicursor=n-v-c-i-sm:block,r-cr-o:hor20
 
-set cursorline 
+set cursorline
 hi CursorLineNr guifg=#d3869b
 
 " tnoremap <Esc> <C-\><C-n>
@@ -40,20 +40,26 @@ autocmd FileType python nmap \r :w<CR>:botright split term://python3 %<CR>:resiz
 
 " compile and run rust files
 autocmd FileType rust nmap \r :w<CR>:botright split term://cargo run<CR>:resize 15<CR>
-    
+
+nmap \w :w<CR>
+" augroup fmt
+"     autocmd!
+"     autocmd BufWritePre * undojoin | Autoformat
+" augroup END
 
 call plug#begin('~/.vim/plugged')
 
 Plug 'elkowar/yuck.vim'
+" Plug 'vim-autoformat/vim-autoformat'
 Plug 'eddyekofo94/gruvbox-flat.nvim'
 Plug 'numToStr/Comment.nvim'
-Plug 'sainnhe/everforest'
+" Plug 'sainnhe/everforest'
 Plug 'rafamadriz/friendly-snippets'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 
 Plug 'alvan/vim-closetag'
-Plug 'sainnhe/gruvbox-material'
+" Plug 'sainnhe/gruvbox-material'
 Plug 'chrisbra/Colorizer'
 Plug 'puremourning/vimspector'
 Plug 'windwp/nvim-autopairs'
@@ -128,8 +134,8 @@ luafile $HOME/.config/nvim/plug-config/comment-config.lua
 " luafile $HOME/.config/nvim/plug-config/formattr-config.lua
 " luafile $HOME/.config/nvim/plug-config/denols-config.lua
 
-" nnoremap <space>e :CocCommand explorer --preset floating<CR> 
-" remap space to confirm compe 
+" nnoremap <space>e :CocCommand explorer --preset floating<CR>
+" remap space to confirm compe
 " inoremap <silent><expr> <Space>      compe#confirm('<Space>')
 " mapping leader key
 let g:mapleader = " "
@@ -143,6 +149,8 @@ nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 " remap for closing buffer
 nnoremap <leader>bd :bdelete<CR>
+nnoremap <leader>bn :bnext<CR>
+nnoremap <leader>bp :bprevious<CR>
 nnoremap <leader>ca :Lspsaga code_action<CR>
 nnoremap <leader>cra :Lspsaga range_code_action<CR>
 nnoremap <leader>rn :Lspsaga rename<CR>
@@ -178,12 +186,12 @@ hi PmenuSel guibg=#a9b665 guifg=#32302f
 
 " highlight! CmpPmenuBorder guifg=#7a8478 guibg=#2b3339
 " highlight Cursor guifg=#7fbbb3
-" 
+"
 " hi CmpItemAbbr guifg=#7a8478
 
 " press <Tab> to expand or jump in a snippet. These can also be mapped separately
 " via <Plug>luasnip-expand-snippet and <Plug>luasnip-jump-next.
-imap <silent><expr> <A-n> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<A-n>' 
+imap <silent><expr> <A-n> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<A-n>'
 " -1 for jumping backwards.
 inoremap <silent> <A-n> <cmd>lua require'luasnip'.jump(1)<Cr>
 inoremap <silent> <A-p> <cmd>lua require'luasnip'.jump(-1)<Cr>
@@ -203,32 +211,32 @@ nnoremap <silent> <C-p> <cmd>Lspsaga diagnostic_jump_prev<Cr>
 function Set_outline()
     sleep 50m
     hi LSOutlineKey           guifg=#ea6962
-    hi LSOutlineEnum  guifg=#d8a657        
-    hi LSOutlineFile         guifg=#a9b665 
+    hi LSOutlineEnum  guifg=#d8a657
+    hi LSOutlineFile         guifg=#a9b665
     hi LSOutlineNull          guifg=#e78a4e
     hi LSOutlineArray         guifg=#7daea3
-    hi LSOutlineClass        guifg=#d8a657 
+    hi LSOutlineClass        guifg=#d8a657
     hi LSOutlineEvent         guifg=#7daea3
     hi LSOutlineField         guifg=#89b482
-    hi LSOutlineMacro        guifg=#e78a4e 
+    hi LSOutlineMacro        guifg=#e78a4e
     hi LSOutlineMethod        guifg=#89b482
-    hi LSOutlineModule       guifg=#d8a657 
+    hi LSOutlineModule       guifg=#d8a657
     hi LSOutlineNumber        guifg=#e78a4e
-    hi LSOutlineObject       guifg=#d8a657 
+    hi LSOutlineObject       guifg=#d8a657
     hi LSOutlineString        guifg=#a9b665
-    hi LSOutlineStruct       guifg=#d8a657 
+    hi LSOutlineStruct       guifg=#d8a657
     hi LSOutlineBoolean       guifg=#e78a4e
     hi LSOutlinePackage       guifg=#e78a4e
-    hi LSOutlineConstant      guifg=#d8a657  
-    hi LSOutlineFunction     guifg=#7daea3 
+    hi LSOutlineConstant      guifg=#d8a657
+    hi LSOutlineFunction     guifg=#7daea3
     hi LSOutlineOperator      guifg=#e78a4e
     hi LSOutlineProperty      guifg=#89b482
-    hi LSOutlineVariable     guifg=#ea6962 
-    hi LSOutlineInterface    guifg=#d8a657 
-    hi LSOutlineNamespace    guifg=#d8a657 
+    hi LSOutlineVariable     guifg=#ea6962
+    hi LSOutlineInterface    guifg=#d8a657
+    hi LSOutlineNamespace    guifg=#d8a657
     hi LSOutlineParameter     guifg=#89b482
     hi LSOutlineTypeAlias     guifg=#d8a657
-    hi LSOutlineEnumMember   guifg=#d8a657 
+    hi LSOutlineEnumMember   guifg=#d8a657
     hi LSOutlineConstructor   guifg=#89b482
     hi LSOutlineStaticMethod  guifg=#89b482
     hi LSOutlinePreviewBorder guifg=#7c6f64
