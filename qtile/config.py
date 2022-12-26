@@ -119,8 +119,8 @@ keys = [
         desc="change wallpaper",
     ),
     # Change the volume if our keyboard has keys
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 -q set Master 2dB+")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 -q set Master 2dB-")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -D pipewire sset Master 1%+")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -D pipewire sset Master 1%-")),
     Key([], "XF86AudioMute", lazy.spawn("amixer set Master toggle")),
     # brightness
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-")),
@@ -266,12 +266,18 @@ screens = [
                     background=colors["black"],
                     foreground=colors["white"],
                     font="JetBrainsMono Nerd Font",
+                    mouse_callbacks={
+                        "Button1": lazy.spawn("eww open --toggle calendar")
+                    },
                 ),
                 widget.Clock(
                     format="%H:%M:%S",
                     fontsize=16,
                     background=colors["black"],
                     foreground=colors["white"],
+                    mouse_callbacks={
+                        "Button1": lazy.spawn("eww open --toggle calendar")
+                    },
                 ),
                 widget.TextBox(
                     text="",
@@ -291,7 +297,7 @@ screens = [
                 #     # background=colors[0],
                 #     font="JetBrainsMono Nerd Font",
                 #     fontsize=21,
-                #     padding=0,
+                #     padding=0,mouse_callbacks
                 # ),
                 # widget.Pomodoro(
                 #     length_long_break=60,

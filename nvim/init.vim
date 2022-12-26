@@ -50,16 +50,17 @@ nmap \w :w<CR>
 call plug#begin('~/.vim/plugged')
 
 Plug 'elkowar/yuck.vim'
+Plug 'akinsho/git-conflict.nvim'
 " Plug 'vim-autoformat/vim-autoformat'
 Plug 'eddyekofo94/gruvbox-flat.nvim'
 Plug 'numToStr/Comment.nvim'
-" Plug 'sainnhe/everforest'
+Plug 'sainnhe/everforest'
 Plug 'rafamadriz/friendly-snippets'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 
 Plug 'alvan/vim-closetag'
-" Plug 'sainnhe/gruvbox-material'
+Plug 'sainnhe/gruvbox-material'
 Plug 'chrisbra/Colorizer'
 Plug 'puremourning/vimspector'
 Plug 'windwp/nvim-autopairs'
@@ -119,6 +120,7 @@ source $HOME/.config/nvim/plug-config/telescope-config.rc.vim
 source $HOME/.config/nvim/plug-config/lsp-config.vim
 source $HOME/.config/nvim/plug-config/neoformat.rc.vim
 luafile $HOME/.config/nvim/plug-config/treesitter-config.lua
+luafile $HOME/.config/nvim/plug-config/gitconflict.lua
 " luafile $HOME/.config/nvim/plug-config/compe-config.lua
 luafile $HOME/.config/nvim/plug-config/luasnip-config.lua
 luafile $HOME/.config/nvim/plug-config/nvim-cmp.lua
