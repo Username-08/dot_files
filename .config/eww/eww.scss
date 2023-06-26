@@ -205,10 +205,13 @@ color: #3e424f;
   font-family: JetBrainsMono Nerd Font;
   font-size: 18px;
   font-weight: normal;
+  color: #d2b48c;
+    // position: relative;
+    // z-index: 10;
 
-.cal-in {
-    padding: 0px 10px 0px 10px;
-    color: #d2b48c;
+// .cal-in {
+//     padding: 0px 10px 0px 10px;
+//     color: #d2b48c;
 
 .cal-inner {
      &.highlight {
@@ -217,8 +220,13 @@ color: #3e424f;
 
       padding: 5px 5px 5px 5px;
       margin-left: 10px;
+      background: none;
     }
   }
+// }
+//
+.cal:hover {
+  box-shadow: 5px 5px 5px #ff0000 inset;
 }
 
 calender {

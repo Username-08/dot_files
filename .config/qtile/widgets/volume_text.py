@@ -23,8 +23,8 @@ class VolumeText(ThreadPoolText):
         self.volume = self.client.getvolume()
 
         if self.volume[0] == 0:
-            return f"婢"
+            return f"󰸈"
         elif self.volume[0] <= 50:
-            return f"奔"
+            return f""
         elif self.volume[0] >= 50:
-            return f"墳"
+            return f""

@@ -232,12 +232,17 @@
                 :wrap false)
             ))))
 
+(defvar cal_shadow false)
+
 (defwidget cal []
-    (box :class "cal" :orientation "v"
-    (box :class "cal-in"
-    (calendar :class "cal-inner" 
+    (eventbox :class "cal" :orientation "v" 
+    ;; (eventbox :class "cal-in"     
+              :onhover "${eww} update cal_shadow=true" 
+              :onhoverlost "${eww} update cal_shadow=false"
+              ;; :style {cal_shadow ? "text-shadow: 5px 5px 5px #ff0000" : "text-shadow: 5px 5px 5px #00ff00"}
+      (calendar :class "cal-inner" 
               :day calendar_day 
-              :year calendar_year))))
+              :year calendar_year)))
 
 (defwindow calendar
     :geometry (geometry :x "-795px" 
@@ -276,8 +281,8 @@
               :min 0))))))
 
 (defwindow audio_ctl
-    :geometry (geometry :x "-20px" 
-                        :y "7%" 
+    :geometry (geometry :x "-47px" 
+                        :y "40px"
                         :anchor "top right"
                         :width "150px" 
                         :height "60px")

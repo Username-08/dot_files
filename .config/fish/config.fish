@@ -6,10 +6,12 @@ if status is-interactive
     end
     set fish_greeting
     set -Ux EDITOR nvim
-    set PATH $PATH /home/yash/.local/bin /home/yash/.cargo/bin
+    set PATH $PATH /home/yash/.local/bin /home/yash/.cargo/bin /home/yash/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin
 end
 #
-# # >>> conda initialize >>>
-# # !! Contents within this block are managed by 'conda init' !!
-# eval /opt/miniconda3/bin/conda "shell.fish" hook $argv | source
-# # <<< conda initialize <<<
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+# if test -f /opt/miniconda3/bin/conda
+#     eval /opt/miniconda3/bin/conda "shell.fish" "hook" $argv | source
+# end
+# <<< conda initialize <<<

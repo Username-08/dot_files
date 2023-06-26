@@ -50,9 +50,11 @@ nmap \w :w<CR>
 call plug#begin('~/.vim/plugged')
 
 Plug 'elkowar/yuck.vim'
+Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 Plug 'akinsho/git-conflict.nvim'
 " Plug 'vim-autoformat/vim-autoformat'
 Plug 'eddyekofo94/gruvbox-flat.nvim'
+Plug 'morhetz/gruvbox'
 Plug 'numToStr/Comment.nvim'
 Plug 'sainnhe/everforest'
 Plug 'rafamadriz/friendly-snippets'
@@ -72,6 +74,7 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/playground'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-lua/popup.nvim'
@@ -104,6 +107,8 @@ let g:gruvbox_improved_warnings = '1'
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_transparent = 'true'
 colorscheme gruvbox-flat
+let g:gruvbox_material_foreground = 'original'
+let g:gruvbox_material_transparent_background = 1
 
 " let g:everforest_background='hard'
 " let g:everforest_enable_italic = 1
@@ -114,7 +119,6 @@ colorscheme gruvbox-flat
 
 set splitbelow
 set switchbuf=newtab
-nnoremap \\ :botright spl<CR>:term<CR>:resize 15<CR>
 " source $HOME/.config/nvim/plug-config/coc.vim
 source $HOME/.config/nvim/plug-config/telescope-config.rc.vim
 source $HOME/.config/nvim/plug-config/lsp-config.vim
@@ -132,6 +136,7 @@ luafile $HOME/.config/nvim/plug-config/lualine-config.lua
 luafile $HOME/.config/nvim/plug-config/lspsaga-config.lua
 luafile $HOME/.config/nvim/plug-config/autopair-config.lua
 luafile $HOME/.config/nvim/plug-config/comment-config.lua
+luafile $HOME/.config/nvim/plug-config/toggleterm-config.lua
 " luafile $HOME/.config/nvim/plug-config/rust-config.lua
 " luafile $HOME/.config/nvim/plug-config/formattr-config.lua
 " luafile $HOME/.config/nvim/plug-config/denols-config.lua
@@ -210,39 +215,44 @@ nnoremap <silent> <C-n> <cmd>Lspsaga diagnostic_jump_next<Cr>
 nnoremap <silent> <C-p> <cmd>Lspsaga diagnostic_jump_prev<Cr>
 
 
-function Set_outline()
-    sleep 50m
-    hi LSOutlineKey           guifg=#ea6962
-    hi LSOutlineEnum  guifg=#d8a657
-    hi LSOutlineFile         guifg=#a9b665
-    hi LSOutlineNull          guifg=#e78a4e
-    hi LSOutlineArray         guifg=#7daea3
-    hi LSOutlineClass        guifg=#d8a657
-    hi LSOutlineEvent         guifg=#7daea3
-    hi LSOutlineField         guifg=#89b482
-    hi LSOutlineMacro        guifg=#e78a4e
-    hi LSOutlineMethod        guifg=#89b482
-    hi LSOutlineModule       guifg=#d8a657
-    hi LSOutlineNumber        guifg=#e78a4e
-    hi LSOutlineObject       guifg=#d8a657
-    hi LSOutlineString        guifg=#a9b665
-    hi LSOutlineStruct       guifg=#d8a657
-    hi LSOutlineBoolean       guifg=#e78a4e
-    hi LSOutlinePackage       guifg=#e78a4e
-    hi LSOutlineConstant      guifg=#d8a657
-    hi LSOutlineFunction     guifg=#7daea3
-    hi LSOutlineOperator      guifg=#e78a4e
-    hi LSOutlineProperty      guifg=#89b482
-    hi LSOutlineVariable     guifg=#ea6962
-    hi LSOutlineInterface    guifg=#d8a657
-    hi LSOutlineNamespace    guifg=#d8a657
-    hi LSOutlineParameter     guifg=#89b482
-    hi LSOutlineTypeAlias     guifg=#d8a657
-    hi LSOutlineEnumMember   guifg=#d8a657
-    hi LSOutlineConstructor   guifg=#89b482
-    hi LSOutlineStaticMethod  guifg=#89b482
-    hi LSOutlinePreviewBorder guifg=#7c6f64
-    hi LSOutlineTypeParameter  guifg=#89b482
-endfunction
+hi SagaWinbarKey           guifg=#ea6962
+hi SagaWinbarEnum  guifg=#d8a657
+hi SagaWinbarFile         guifg=#a9b665
+hi SagaWinbarNull          guifg=#e78a4e
+hi SagaWinbarArray         guifg=#7daea3
+hi SagaWinbarClass        guifg=#d8a657
+hi SagaWinbarEvent         guifg=#7daea3
+hi SagaWinbarField         guifg=#89b482
+hi SagaWinbarMacro        guifg=#e78a4e
+hi SagaWinbarMethod        guifg=#89b482
+hi SagaWinbarModule       guifg=#d8a657
+hi SagaWinbarNumber        guifg=#e78a4e
+hi SagaWinbarObject       guifg=#d8a657
+hi SagaWinbarString        guifg=#a9b665
+hi SagaWinbarStruct       guifg=#d8a657
+hi SagaWinbarBoolean       guifg=#e78a4e
+hi SagaWinbarPackage       guifg=#e78a4e
+hi SagaWinbarConstant      guifg=#d8a657
+hi SagaWinbarFunction     guifg=#7daea3
+hi SagaWinbarOperator      guifg=#e78a4e
+hi SagaWinbarProperty      guifg=#89b482
+hi SagaWinbarVariable     guifg=#ea6962
+hi SagaWinbarInterface    guifg=#d8a657
+hi SagaWinbarNamespace    guifg=#d8a657
+hi SagaWinbarParameter     guifg=#89b482
+hi SagaWinbarTypeAlias     guifg=#d8a657
+hi SagaWinbarEnumMember   guifg=#d8a657
+hi SagaWinbarConstructor   guifg=#89b482
+hi SagaWinbarStaticMethod  guifg=#89b482
+hi SagaWinbarPreviewBorder guifg=#7c6f64
+hi SagaWinbarTypeParameter  guifg=#89b482
+hi SagaWinbarFilename       guifg=#d4be98
+hi SagaWinbarFoldername       guifg=#d4be98
+hi SagaWinbarSep            guifg=#7c6f64
+hi Title       guifg=#d4be98
 
-nnoremap  <leader>ot :LSoutlineToggle<CR>:call Set_outline()<CR>
+nnoremap <silent> gd :Lspsaga goto_definition<CR>
+nnoremap <silent> gr :Lspsaga lsp_finder<CR>
+
+nnoremap  <leader>ot :Lspsaga outline<CR>
+nnoremap \\ :ToggleTerm<CR>

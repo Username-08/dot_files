@@ -27,11 +27,14 @@
 from typing import List
 
 import os.path
-from libqtile import bar, layout, widget
+from libqtile import bar, layout, widget, qtile
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from widgets.volume_text import VolumeText
 from widgets.battery_text import BatteryText
+
+if qtile.core.name == "wayland":
+    import wayland_config
 
 mod = "mod4"
 terminal = "kitty"
@@ -79,7 +82,7 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod], "d", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "p", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
@@ -134,7 +137,7 @@ groups = [
     Group("1", label=""),
     Group("2", label=""),
     Group("3", label=""),
-    Group("4", label=""),
+    Group(name="4", label=""),
     Group("5", label=""),
 ]
 
@@ -218,7 +221,7 @@ screens = [
                     foreground=colors["black"],
                     # background=colors[0],
                     font="JetBrainsMono Nerd Font",
-                    fontsize=21,
+                    fontsize=22,
                     padding=0,
                 ),
                 # widget.Image(filename="~/.config/qtile/gruv-arch(1).png", margin=2),
@@ -246,7 +249,7 @@ screens = [
                     foreground=colors["black"],
                     # background=colors[0],
                     font="JetBrainsMono Nerd Font",
-                    fontsize=21,
+                    fontsize=22,
                     padding=0,
                 ),
                 # widget.TextBox("  "),
@@ -257,7 +260,7 @@ screens = [
                     foreground=colors["black"],
                     # background=colors[0],
                     font="JetBrainsMono Nerd Font",
-                    fontsize=21,
+                    fontsize=22,
                     padding=0,
                 ),
                 widget.TextBox(
@@ -284,7 +287,7 @@ screens = [
                     foreground=colors["black"],
                     # background=colors[0],
                     font="JetBrainsMono Nerd Font",
-                    fontsize=21,
+                    fontsize=22,
                     padding=0,
                 ),
                 widget.Spacer(),
@@ -322,7 +325,7 @@ screens = [
                     foreground=colors["black"],
                     # background=colors[0],
                     font="JetBrainsMono Nerd Font",
-                    fontsize=21,
+                    fontsize=22,
                     padding=0,
                 ),
                 widget.Systray(icon_size=21, background=colors["black"]),
@@ -331,7 +334,7 @@ screens = [
                     foreground=colors["black"],
                     # background=colors[0],
                     font="JetBrainsMono Nerd Font",
-                    fontsize=21,
+                    fontsize=22,
                     padding=0,
                 ),
                 widget.TextBox("    "),
@@ -340,22 +343,22 @@ screens = [
                     foreground=colors["black"],
                     # background=colors[0],
                     font="JetBrainsMono Nerd Font",
-                    fontsize=21,
+                    fontsize=22,
                     padding=0,
                 ),
                 widget.TextBox(
-                    "",
+                    "󰃟 ",
                     background=colors["black"],
                     foreground=colors["blue"],
-                    fontsize=24,
+                    fontsize=17,
                     font="JetBrainsMono",
                 ),
-                widget.TextBox(
-                    " ",
-                    background=colors["black"],
-                    foreground=colors["blue"],
-                    fontsize=23,
-                ),
+                # widget.TextBox(
+                #     " ",
+                #     background=colors["black"],
+                #     foreground=colors["blue"],
+                #     fontsize=23,
+                # ),
                 widget.Backlight(
                     brightness_file="/sys/class/backlight/intel_backlight/brightness",
                     max_brightness_file="/sys/class/backlight/intel_backlight/max_brightness",
@@ -367,7 +370,7 @@ screens = [
                     foreground=colors["black"],
                     # background=colors[0],
                     font="JetBrainsMono Nerd Font",
-                    fontsize=21,
+                    fontsize=22,
                     padding=0,
                 ),
                 widget.TextBox("    "),
@@ -376,7 +379,7 @@ screens = [
                     foreground=colors["black"],
                     # background=colors[0],
                     font="JetBrainsMono Nerd Font",
-                    fontsize=21,
+                    fontsize=22,
                     padding=0,
                 ),
                 widget.TextBox(
@@ -396,7 +399,7 @@ screens = [
                     foreground=colors["black"],
                     # background=colors[0],
                     font="JetBrainsMono Nerd Font",
-                    fontsize=21,
+                    fontsize=22,
                     padding=0,
                 ),
                 widget.TextBox("    "),
@@ -405,7 +408,7 @@ screens = [
                     foreground=colors["black"],
                     # background=colors[0],
                     font="JetBrainsMono Nerd Font",
-                    fontsize=21,
+                    fontsize=22,
                     padding=0,
                 ),
                 VolumeText(
@@ -422,7 +425,7 @@ screens = [
                     foreground=colors["black"],
                     # background=colors[0],
                     font="JetBrainsMono Nerd Font",
-                    fontsize=21,
+                    fontsize=22,
                     padding=0,
                 ),
                 widget.TextBox("    "),
@@ -431,7 +434,7 @@ screens = [
                     foreground=colors["black"],
                     # background=colors[0],
                     font="JetBrainsMono Nerd Font",
-                    fontsize=21,
+                    fontsize=22,
                     padding=0,
                 ),
                 BatteryText(
@@ -445,14 +448,14 @@ screens = [
                     foreground=colors["black"],
                     # background=colors[0],
                     font="JetBrainsMono Nerd Font",
-                    fontsize=21,
+                    fontsize=22,
                     markup=False,
                     padding=0,
                 ),
                 widget.TextBox("   "),
             ],
-            25,
-            margin=[9, 0, 4, 0],
+            24,
+            margin=[10, 0, 4, 0],
             opacity=0.9,
             background="#32302f",
         ),
@@ -510,4 +513,4 @@ focus_on_window_activation = "smart"
 #
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
-wmname = "qtile"
+wmname = "LG3D"
