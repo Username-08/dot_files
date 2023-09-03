@@ -26,6 +26,7 @@
 
 from typing import List
 
+
 import os.path
 from libqtile import bar, layout, widget, qtile
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
@@ -35,6 +36,8 @@ from widgets.battery_text import BatteryText
 
 if qtile.core.name == "wayland":
     import wayland_config
+
+import alookachaloo
 
 mod = "mod4"
 terminal = "kitty"
