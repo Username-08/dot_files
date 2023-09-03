@@ -11,6 +11,9 @@ set autoread
 set mouse=a
 set guicursor=n-v-c-i-sm:block,r-cr-o:hor20
 
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
 set cursorline
 hi CursorLineNr guifg=#d3869b
 
@@ -22,6 +25,7 @@ set shiftwidth=4
 
 " set up indentations for each filetype
 autocmd FileType cpp setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType lua setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType typescriptreact setlocal shiftwidth=2 tabstop=2 softtabstop=2 smartindent
 autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2 smartindent
@@ -53,7 +57,8 @@ Plug 'elkowar/yuck.vim'
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 Plug 'akinsho/git-conflict.nvim'
 " Plug 'vim-autoformat/vim-autoformat'
-Plug 'eddyekofo94/gruvbox-flat.nvim'
+" Plug 'eddyekofo94/gruvbox-flat.nvim'
+Plug 'Username-08/gruvbox-flat.nvim'
 Plug 'morhetz/gruvbox'
 Plug 'numToStr/Comment.nvim'
 Plug 'sainnhe/everforest'
@@ -61,10 +66,13 @@ Plug 'rafamadriz/friendly-snippets'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 
+Plug 'ggandor/leap.nvim'
 Plug 'alvan/vim-closetag'
 Plug 'sainnhe/gruvbox-material'
-Plug 'chrisbra/Colorizer'
-Plug 'puremourning/vimspector'
+Plug 'norcalli/nvim-colorizer.lua'
+" Plug 'puremourning/vimspector'
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
 Plug 'windwp/nvim-autopairs'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -77,6 +85,7 @@ Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/playground'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'debugloop/telescope-undo.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'hoob3rt/lualine.nvim'
@@ -120,6 +129,7 @@ let g:gruvbox_material_transparent_background = 1
 set splitbelow
 set switchbuf=newtab
 " source $HOME/.config/nvim/plug-config/coc.vim
+luafile $HOME/.config/nvim/plug-config/nonicons-config.lua
 source $HOME/.config/nvim/plug-config/telescope-config.rc.vim
 source $HOME/.config/nvim/plug-config/lsp-config.vim
 source $HOME/.config/nvim/plug-config/neoformat.rc.vim
@@ -128,6 +138,7 @@ luafile $HOME/.config/nvim/plug-config/gitconflict.lua
 " luafile $HOME/.config/nvim/plug-config/compe-config.lua
 luafile $HOME/.config/nvim/plug-config/luasnip-config.lua
 luafile $HOME/.config/nvim/plug-config/nvim-cmp.lua
+luafile $HOME/.config/nvim/plug-config/dap-config.lua
 " luafile $HOME/.config/nvim/plug-config/python-config.lua
 " luafile $HOME/.config/nvim/plug-config/latex-config.lua
 " luafile $HOME/.config/nvim/plug-config/javascript-config.lua
@@ -164,7 +175,7 @@ nnoremap <leader>rn :Lspsaga rename<CR>
 
 hi DiagnosticWarn guifg=#d8a657
 hi DiagnosticUnderlineError gui=undercurl
-hi DiagnosticUnderlineHint gui=undercurl
+hi DiagnosticUnderlineHint gui=undercurl guisp=#89b482
 hi DiagnosticUnderlineWarn gui=undercurl
 hi CursorLine guibg=None
 
@@ -256,3 +267,11 @@ nnoremap <silent> gr :Lspsaga lsp_finder<CR>
 
 nnoremap  <leader>ot :Lspsaga outline<CR>
 nnoremap \\ :ToggleTerm<CR>
+
+" leap nvim
+lua require('leap').add_default_mappings()
+hi LeapMatch      cterm=underline,nocombine ctermfg=9 gui=underline,nocombine guifg=#a9b665
+hi LeapLabelPrimary cterm=nocombine ctermfg=0 ctermbg=9 gui=nocombine guifg=Black guibg=#89b482
+
+
+autocmd BufReadPost,FileReadPost * normal zR

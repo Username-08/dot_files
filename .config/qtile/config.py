@@ -300,7 +300,7 @@ screens = [
                 #     # background=colors[0],
                 #     font="JetBrainsMono Nerd Font",
                 #     fontsize=21,
-                #     padding=0,mouse_callbacks
+                #     padding=0,
                 # ),
                 # widget.Pomodoro(
                 #     length_long_break=60,

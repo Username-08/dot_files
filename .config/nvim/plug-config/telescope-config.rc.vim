@@ -19,9 +19,13 @@ require('telescope').setup{
             },
           },
         },
+        undo = {};
       },
     defaults = {
         file_ignore_patterns={"node_modules/.", "dist/.", "target/."},
+        prompt_prefix = "  " .. "" .. "  ",
+        selection_caret = " ❯ ",
+        entry_prefix = "   ",
     },
     pickers = {
         find_files = {
@@ -31,4 +35,5 @@ require('telescope').setup{
 }
 
 require("telescope").load_extension "file_browser"
+require("telescope").load_extension("undo")
 EOF

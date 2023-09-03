@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Yash Ranjan"
-      user-mail-address "yashranjan08@gmail.com")
+      user-mail-address "yashranjan08@proton.me")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -77,37 +77,37 @@
 
 (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 17 :weight 'medium))
 
-(global-tree-sitter-mode)
-(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
-
-(add-to-list 'load-path "~/.emacs.d/.local/straight/build-28.2/emacs-application-framework/")
-(require 'eaf)
-(require 'eaf-markdown-previewer)
-(require 'eaf-video-player)
-(require 'eaf-jupyter)
-(require 'eaf-browser)
-(require 'eaf-image-viewer)
-(require 'eaf-pdf-viewer)
-(require 'eaf-org-previewer)
-(require 'eaf-evil)
-
-(define-key key-translation-map (kbd "SPC")
-    (lambda (prompt)
-      (if (derived-mode-p 'eaf-mode)
-          (pcase eaf--buffer-app-name
-            ("browser" (if  (string= (eaf-call-sync "call_function" eaf--buffer-id "is_focus") "True")
-                           (kbd "SPC")
-                         (kbd eaf-evil-leader-key)))
-            ("pdf-viewer" (kbd eaf-evil-leader-key))
-            ("image-viewer" (kbd eaf-evil-leader-key))
-            (_  (kbd "SPC")))
-        (kbd "SPC"))))
-
-(setq browse-url-browser-function 'eaf-open-browser)
-(setq eaf-browser-enable-adblocker "true")
-(setq eaf-browser-continue-where-left-off t)
-(setq eaf-browser-default-search-engine "duckduckgo")
-(setq eaf-browse-blank-page-url "https://duckduckgo.com")
+;; (global-tree-sitter-mode)
+;; (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+;;
+;; (add-to-list 'load-path "~/.emacs.d/.local/straight/build-28.2/emacs-application-framework/")
+;; (require 'eaf)
+;; (require 'eaf-markdown-previewer)
+;; (require 'eaf-video-player)
+;; (require 'eaf-jupyter)
+;; (require 'eaf-browser)
+;; (require 'eaf-image-viewer)
+;; (require 'eaf-pdf-viewer)
+;; (require 'eaf-org-previewer)
+;; (require 'eaf-evil)
+;;
+;; (define-key key-translation-map (kbd "SPC")
+;;     (lambda (prompt)
+;;       (if (derived-mode-p 'eaf-mode)
+;;           (pcase eaf--buffer-app-name
+;;             ("browser" (if  (string= (eaf-call-sync "call_function" eaf--buffer-id "is_focus") "True")
+;;                            (kbd "SPC")
+;;                          (kbd eaf-evil-leader-key)))
+;;             ("pdf-viewer" (kbd eaf-evil-leader-key))
+;;             ("image-viewer" (kbd eaf-evil-leader-key))
+;;             (_  (kbd "SPC")))
+;;         (kbd "SPC"))))
+;;
+;; (setq browse-url-browser-function 'eaf-open-browser)
+;; (setq eaf-browser-enable-adblocker "true")
+;; (setq eaf-browser-continue-where-left-off t)
+;; (setq eaf-browser-default-search-engine "duckduckgo")
+;; (setq eaf-browse-blank-page-url "https://duckduckgo.com")
 
 ;;(require 'company)
 ;;(define-key company-active-map (kbd "SPC") 'company-complete-selection)
@@ -121,10 +121,10 @@
 (add-to-list 'projectile-project-root-files-bottom-up "Cargo.toml")
 (add-to-list 'projectile-project-root-files-bottom-up "tsconfig.json")
 
-(require 'tree-sitter)
-(tree-sitter-hl-add-patterns 'rust
-  [( ["==" "=>" "->" ";" "(" ")" "{" "}" "[" "]" "<" ">" "=" "|" "&" "^" "." "," ":" "::" ">=" "<=" "!=" "+=" "-=" "*=" "/=" "/" "*" "-" "+"] @function.macro)] )
-(setq select-enable-clipboard nil)
+;; (require 'tree-sitter)
+;; (tree-sitter-hl-add-patterns 'rust
+;;   [( ["==" "=>" "->" ";" "(" ")" "{" "}" "[" "]" "<" ">" "=" "|" "&" "^" "." "," ":" "::" ">=" "<=" "!=" "+=" "-=" "*=" "/=" "/" "*" "-" "+"] @function.macro)] )
+;; (setq select-enable-clipboard nil)
 
 ;; (require 'flycheck)
 ;; (setq flycheck-check-syntax-automatically '(save mode-enabled))
