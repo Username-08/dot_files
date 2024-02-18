@@ -7,8 +7,10 @@ if status is-interactive
     set fish_greeting
     set -Ux EDITOR nvim
     alias nix-shell="nix-shell --command 'fish'"
-    set PATH $PATH /home/yash/.local/bin /home/yash/.cargo/bin /home/yash/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin
+    set PATH $PATH /home/yash/.local/bin /home/yash/.cargo/bin /home/yash/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin /home/yash/.yarn/bin
+    zoxide init fish | source
 end
+
 #
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!

@@ -31,13 +31,13 @@ import os.path
 from libqtile import bar, layout, widget, qtile
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
-from widgets.volume_text import VolumeText
+# from widgets.volume_text import VolumeText
 from widgets.battery_text import BatteryText
 
-if qtile.core.name == "wayland":
-    import wayland_config
-
-import alookachaloo
+# if qtile.core.name == "wayland":
+#     import wayland_config
+# 
+# import alookachaloo
 
 mod = "mod4"
 terminal = "kitty"
@@ -142,6 +142,7 @@ groups = [
     Group("3", label=""),
     Group(name="4", label=""),
     Group("5", label=""),
+    Group("6", label="󰓓"),
 ]
 
 for i in groups:
@@ -296,33 +297,33 @@ screens = [
                 widget.Spacer(),
                 widget.TextBox("    "),
                 # widget.Systray(icon_size=21, background=colors["black"]),
-                # widget.TextBox("    "),
-                # widget.TextBox(
-                #     text="",
-                #     foreground=colors["black"],
-                #     # background=colors[0],
-                #     font="JetBrainsMono Nerd Font",
-                #     fontsize=21,
-                #     padding=0,
-                # ),
-                # widget.Pomodoro(
-                #     length_long_break=60,
-                #     color_active=colors["white"],
-                #     color_inactive=colors["white"],
-                #     color_break=colors["yellow"],
-                #     background=colors["black"],
-                #     foreground=colors["white"],
-                # ),
-                # # widget.TextBox("   ", background=colors["black"]),
-                # widget.TextBox(
-                #     text="",
-                #     foreground=colors["black"],
-                #     # background=colors[0],
-                #     font="JetBrainsMono Nerd Font",
-                #     fontsize=21,
-                #     padding=0,
-                # ),
-                # widget.TextBox("    "),
+                widget.TextBox("    "),
+                widget.TextBox(
+                    text="",
+                    foreground=colors["black"],
+                    # background=colors[0],
+                    font="JetBrainsMono Nerd Font",
+                    fontsize=21,
+                    padding=0,
+                ),
+                widget.Pomodoro(
+                    length_long_break=60,
+                    color_active=colors["white"],
+                    color_inactive=colors["white"],
+                    color_break=colors["yellow"],
+                    background=colors["black"],
+                    foreground=colors["white"],
+                ),
+                # widget.TextBox("   ", background=colors["black"]),
+                widget.TextBox(
+                    text="",
+                    foreground=colors["black"],
+                    # background=colors[0],
+                    font="JetBrainsMono Nerd Font",
+                    fontsize=21,
+                    padding=0,
+                ),
+                widget.TextBox("    "),
                 widget.TextBox(
                     text="",
                     foreground=colors["black"],
@@ -414,13 +415,13 @@ screens = [
                     fontsize=22,
                     padding=0,
                 ),
-                VolumeText(
-                    4,
-                    background=colors["black"],
-                    fontsize=18,
-                    font="JetBrainsMono Nerd Font",
-                    foreground=colors["yellow"],
-                ),
+                # VolumeText(
+                #     4,
+                #     background=colors["black"],
+                #     fontsize=18,
+                #     font="JetBrainsMono Nerd Font",
+                #     foreground=colors["yellow"],
+                # ),
                 widget.TextBox(" ", background=colors["black"]),
                 widget.Volume(background=colors["black"], foreground=colors["yellow"]),
                 widget.TextBox(

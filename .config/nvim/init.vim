@@ -11,6 +11,7 @@ set autoread
 set mouse=a
 set guicursor=n-v-c-i-sm:block,r-cr-o:hor20
 
+set nofoldenable
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
@@ -53,6 +54,9 @@ nmap \w :w<CR>
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'folke/noice.nvim'
+Plug 'MunifTanjim/nui.nvim'
+
 Plug 'elkowar/yuck.vim'
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 Plug 'akinsho/git-conflict.nvim'
@@ -65,6 +69,9 @@ Plug 'sainnhe/everforest'
 Plug 'rafamadriz/friendly-snippets'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
+
+" vimtex
+Plug 'lervag/vimtex'
 
 Plug 'ggandor/leap.nvim'
 Plug 'alvan/vim-closetag'
@@ -92,7 +99,7 @@ Plug 'hoob3rt/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'glepnir/lspsaga.nvim'
 Plug 'sbdchd/neoformat'
-Plug 'TimUntersberger/neogit'
+Plug 'NeogitOrg/neogit'
 
 " Plug 'andweeb/presence.nvim'
 " Plug 'pangloss/vim-javascript'
@@ -129,10 +136,12 @@ let g:gruvbox_material_transparent_background = 1
 set splitbelow
 set switchbuf=newtab
 " source $HOME/.config/nvim/plug-config/coc.vim
+luafile $HOME/.config/nvim/plug-config/noice-config.lua
 luafile $HOME/.config/nvim/plug-config/nonicons-config.lua
 source $HOME/.config/nvim/plug-config/telescope-config.rc.vim
 source $HOME/.config/nvim/plug-config/lsp-config.vim
 source $HOME/.config/nvim/plug-config/neoformat.rc.vim
+source $HOME/.config/nvim/plug-config/vimtex.rc.vim
 luafile $HOME/.config/nvim/plug-config/treesitter-config.lua
 luafile $HOME/.config/nvim/plug-config/gitconflict.lua
 " luafile $HOME/.config/nvim/plug-config/compe-config.lua
@@ -148,6 +157,7 @@ luafile $HOME/.config/nvim/plug-config/lspsaga-config.lua
 luafile $HOME/.config/nvim/plug-config/autopair-config.lua
 luafile $HOME/.config/nvim/plug-config/comment-config.lua
 luafile $HOME/.config/nvim/plug-config/toggleterm-config.lua
+luafile $HOME/.config/nvim/plug-config/neogit-config.lua
 " luafile $HOME/.config/nvim/plug-config/rust-config.lua
 " luafile $HOME/.config/nvim/plug-config/formattr-config.lua
 " luafile $HOME/.config/nvim/plug-config/denols-config.lua
@@ -161,17 +171,17 @@ let g:mapleader = " "
 nnoremap <silent> K <cmd>Lspsaga hover_doc<CR>
 nnoremap <silent> <C-k> <cmd>Lspsaga show_line_diagnostics<CR>
 " remap for switching splits
-nnoremap <leader>h :wincmd h<CR>
-nnoremap <leader>j :wincmd j<CR>
-nnoremap <leader>k :wincmd k<CR>
-nnoremap <leader>l :wincmd l<CR>
+nnoremap <silent><leader>h :wincmd h<CR>
+nnoremap <silent><leader>j :wincmd j<CR>
+nnoremap <silent><leader>k :wincmd k<CR>
+nnoremap <silent><leader>l :wincmd l<CR>
 " remap for closing buffer
-nnoremap <leader>bd :bdelete<CR>
-nnoremap <leader>bn :bnext<CR>
-nnoremap <leader>bp :bprevious<CR>
-nnoremap <leader>ca :Lspsaga code_action<CR>
-nnoremap <leader>cra :Lspsaga range_code_action<CR>
-nnoremap <leader>rn :Lspsaga rename<CR>
+nnoremap <silent><leader>bd :bdelete<CR>
+nnoremap <silent><leader>bn :bnext<CR>
+nnoremap <silent><leader>bp :bprevious<CR>
+nnoremap <silent><leader>ca :Lspsaga code_action<CR>
+nnoremap <silent><leader>cra :Lspsaga range_code_action<CR>
+nnoremap <silent><leader>rn :Lspsaga rename<CR>
 
 hi DiagnosticWarn guifg=#d8a657
 hi DiagnosticUnderlineError gui=undercurl

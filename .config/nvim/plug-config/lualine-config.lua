@@ -199,17 +199,17 @@ ins_left {
 
 ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
 
-ins_left { 
-  'location',
-  color = { fg = colors.gray},
-}
+-- ins_left { 
+--   'location',
+--   color = { fg = colors.gray},
+-- }
 
-ins_left {
-  -- filesize component
-  'filesize',
-  color = { fg = colors.gray},
-  cond = conditions.buffer_not_empty,
-}
+-- ins_left {
+--   -- filesize component
+--   'filesize',
+--   color = { fg = colors.gray},
+--   cond = conditions.buffer_not_empty,
+-- }
 
 
 ins_left {
@@ -234,6 +234,11 @@ ins_left {
 
 
 -- Add components to right sections
+ins_right {
+  require("noice").api.statusline.mode.get,
+  cond = require("noice").api.statusline.mode.has,
+  color = { fg = colors.fg},
+}
 ins_right {
   'o:encoding', -- option component same as &encoding in viml
   fmt = string.upper, -- I'm not sure why it's upper case either ;)

@@ -1,3 +1,7 @@
+let g:neoformat_cpp_clang_format = {
+            \ 'exe': 'clang-format',
+            \ 'args': ['--style="{BasedOnStyle: llvm, IndentWidth: 4}"']
+            \ }
 let g:neoformat_c_clang_format = {
             \ 'exe': 'clang-format',
             \ 'args': ['--style="{BasedOnStyle: llvm, IndentWidth: 4}"']

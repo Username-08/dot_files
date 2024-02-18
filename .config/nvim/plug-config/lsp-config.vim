@@ -156,7 +156,7 @@ capabilities.textDocument.completion.completionItem = {
 --    },
 -- }
 
-local servers = { 'jedi_language_server', 'rust_analyzer', 'tsserver', 'clangd', 'emmet_ls'}
+local servers = { 'jedi_language_server', 'rust_analyzer', 'tsserver', 'clangd', 'emmet_ls', 'solidity_ls_nomicfoundation', 'texlab'}
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -164,6 +164,16 @@ for _, lsp in pairs(servers) do
     }
 end
 
+-- solidity ls
+-- configs.solidity = {
+--   default_config = {
+--     cmd = {'nomicfoundation-solidity-language-server', '--stdio'},
+--     filetypes = { 'solidity' },
+--     root_dir = lspconfig.util.find_git_ancestor,
+--     single_file_support = true,
+--   },
+-- }
+-- lspconfig.solidity.setup {}
 -- requires a file containing user's lspconfigs
 
 for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do

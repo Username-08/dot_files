@@ -8,6 +8,28 @@ local luasnip = require("luasnip")
 
 cmp.setup({
   preselect = cmp.PreselectMode.None,
+  formatting = {
+    fields = { "abbr", "kind", "menu" },
+    format = function(_, item)
+        -- item.menu = ''
+        local content = item.menu
+        local win_width = vim.api.nvim_win_get_width(0)
+        local max_content_width = math.floor(win_width * 0.3)
+        if content then
+          -- item.kind = string.format('%s', item)
+          if #content > max_content_width then
+              item.menu = vim.fn.strcharpart(content, 0, max_content_width - 1) .. "…"
+          -- else
+          --     item.abbr = content .. (" "):rep(max_content_width - #content)
+          end
+        end
+        local content = item.abbr
+        if #content > max_content_width then
+          item.abbr = vim.fn.strcharpart(content, 0, max_content_width - 1) .. "…"
+        end
+        return item
+    end
+  },
   snippet = {
     -- REQUIRED - you must specify a snippet engine
     expand = function(args)
