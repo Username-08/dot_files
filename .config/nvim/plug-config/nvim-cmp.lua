@@ -5,6 +5,7 @@ end
 
 local cmp = require'cmp'
 local luasnip = require("luasnip")
+require("luasnip.loaders.from_vscode").lazy_load() -- Load only html and css snippets
 
 cmp.setup({
   preselect = cmp.PreselectMode.None,
@@ -88,6 +89,9 @@ cmp.setup({
     { name = 'luasnip' }, -- For luasnip users.
     -- { name = 'ultisnips' }, -- For ultisnips users.
     -- { name = 'snippy' }, -- For snippy users.
+    { name = "copilot", group_index = 2 },
+    { name = "path" },
+    { name = "orgmode" },
   }, {
     { name = 'buffer' },
   }),

@@ -1,3 +1,7 @@
+lua<<EOF
+vim.loader.enable()
+EOF
+
 set encoding=utf-8
 set termguicolors
 set title
@@ -32,6 +36,7 @@ autocmd FileType typescriptreact setlocal shiftwidth=2 tabstop=2 softtabstop=2 s
 autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2 smartindent
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2 smartindent
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2 smartindent
+autocmd FileType verilog setlocal shiftwidth=2 tabstop=2 softtabstop=2 smartindent
 autocmd FileType nasm highlight nasmGen32Register guifg=#89b482
 autocmd FileType nasm highlight nasmGen64Register guifg=#89b482
 au BufRead,BufNewFile *.graphql,*.graphqls,*.gql setfiletype graphql
@@ -54,45 +59,62 @@ nmap \w :w<CR>
 
 call plug#begin('~/.vim/plugged')
 
+" org-mode
+Plug 'nvim-orgmode/orgmode', { 'on': [] }
+Plug 'chipsenkbeil/org-roam.nvim', { 'on': [] }
+
+" copilot
+Plug 'zbirenbaum/copilot.lua', { 'on': [] }
+Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'on': [] }
+Plug 'zbirenbaum/copilot-cmp', { 'on': [] }
+
 Plug 'folke/noice.nvim'
 Plug 'MunifTanjim/nui.nvim'
 
 Plug 'elkowar/yuck.vim'
-Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+" Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 Plug 'akinsho/git-conflict.nvim'
 " Plug 'vim-autoformat/vim-autoformat'
 " Plug 'eddyekofo94/gruvbox-flat.nvim'
 Plug 'Username-08/gruvbox-flat.nvim'
-Plug 'morhetz/gruvbox'
+" Plug 'morhetz/gruvbox'
 Plug 'numToStr/Comment.nvim'
-Plug 'sainnhe/everforest'
-Plug 'rafamadriz/friendly-snippets'
-Plug 'L3MON4D3/LuaSnip'
-Plug 'saadparwaiz1/cmp_luasnip'
+" Plug 'sainnhe/everforest'
+"
+Plug 'rafamadriz/friendly-snippets', { 'on': [] }
+Plug 'L3MON4D3/LuaSnip', { 'on': [] }
+Plug 'saadparwaiz1/cmp_luasnip', { 'on': [] }
 
 " vimtex
 Plug 'lervag/vimtex'
 
 Plug 'ggandor/leap.nvim'
 Plug 'alvan/vim-closetag'
-Plug 'sainnhe/gruvbox-material'
+" Plug 'sainnhe/gruvbox-material'
 Plug 'norcalli/nvim-colorizer.lua'
+
 " Plug 'puremourning/vimspector'
-Plug 'mfussenegger/nvim-dap'
-Plug 'rcarriga/nvim-dap-ui'
-Plug 'windwp/nvim-autopairs'
+Plug 'mfussenegger/nvim-dap', { 'on': [] }
+Plug 'rcarriga/nvim-dap-ui', { 'on': [] }
+Plug 'nvim-neotest/nvim-nio', { 'on': [] }
+
+Plug 'windwp/nvim-autopairs', { 'on': [] }
 Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'nvim-treesitter/playground'
+
+Plug 'hrsh7th/cmp-nvim-lsp', { 'on': [] }
+Plug 'hrsh7th/nvim-cmp', { 'on': [] }
+Plug 'hrsh7th/cmp-buffer', { 'on': [] }
+Plug 'hrsh7th/cmp-path', { 'on': [] }
+Plug 'hrsh7th/cmp-cmdline', { 'on': [] }
+
+Plug 'nvim-treesitter/nvim-treesitter', { 'on': [] }
+Plug 'nvim-treesitter/playground', { 'on': [] }
+Plug 'nvim-treesitter/nvim-treesitter-textobjects', { 'on': [] }
+
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'debugloop/telescope-undo.nvim'
+
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'hoob3rt/lualine.nvim'
@@ -117,6 +139,37 @@ Plug 'NeogitOrg/neogit'
 
 call plug#end()
 
+augroup lazy_load
+    autocmd!
+    autocmd VimEnter * call LazyLoad()
+    
+    function LazyLoad()
+        call plug#load('orgmode', 'org-roam.nvim')
+        luafile $HOME/.config/nvim/plug-config/orgmode-config.lua
+
+        call plug#load('copilot.lua', 'CopilotChat.nvim', 'copilot-cmp')
+        luafile $HOME/.config/nvim/plug-config/copilot-config.lua
+
+        call plug#load('nvim-treesitter', 'playground', 'nvim-treesitter-textobjects')
+        luafile $HOME/.config/nvim/plug-config/treesitter-config.lua
+
+        call plug#load('cmp-nvim-lsp', 'nvim-cmp', 'cmp-buffer')
+        call plug#load('cmp-path', 'cmp-cmdline')
+        call plug#load('friendly-snippets', 'LuaSnip', 'cmp_luasnip')
+        luafile $HOME/.config/nvim/plug-config/nvim-cmp.lua
+
+        call plug#load('nvim-autopairs')
+        luafile $HOME/.config/nvim/plug-config/autopair-config.lua
+
+        call plug#load('nvim-dap', 'nvim-dap-ui', 'nvim-nio')
+        luafile $HOME/.config/nvim/plug-config/dap-config.lua
+
+        autocmd! lazy_load
+    endfunction
+  
+augroup END
+
+
 " gruvbox settings
 let g:gruvbox_bold = '0'
 let g:gruvbox_improved_warnings = '1'
@@ -133,7 +186,7 @@ let g:gruvbox_material_transparent_background = 1
 " colorscheme everforest
 
 
-set splitbelow
+" set splitbelow
 set switchbuf=newtab
 " source $HOME/.config/nvim/plug-config/coc.vim
 luafile $HOME/.config/nvim/plug-config/noice-config.lua
@@ -142,21 +195,23 @@ source $HOME/.config/nvim/plug-config/telescope-config.rc.vim
 source $HOME/.config/nvim/plug-config/lsp-config.vim
 source $HOME/.config/nvim/plug-config/neoformat.rc.vim
 source $HOME/.config/nvim/plug-config/vimtex.rc.vim
-luafile $HOME/.config/nvim/plug-config/treesitter-config.lua
+
+" luafile $HOME/.config/nvim/plug-config/treesitter-config.lua
 luafile $HOME/.config/nvim/plug-config/gitconflict.lua
+
 " luafile $HOME/.config/nvim/plug-config/compe-config.lua
-luafile $HOME/.config/nvim/plug-config/luasnip-config.lua
-luafile $HOME/.config/nvim/plug-config/nvim-cmp.lua
-luafile $HOME/.config/nvim/plug-config/dap-config.lua
+" luafile $HOME/.config/nvim/plug-config/luasnip-config.lua
+" luafile $HOME/.config/nvim/plug-config/nvim-cmp.lua
+" luafile $HOME/.config/nvim/plug-config/dap-config.lua
 " luafile $HOME/.config/nvim/plug-config/python-config.lua
 " luafile $HOME/.config/nvim/plug-config/latex-config.lua
 " luafile $HOME/.config/nvim/plug-config/javascript-config.lua
 " luafile $HOME/.config/nvim/plug-config/cpp-config.lua
 luafile $HOME/.config/nvim/plug-config/lualine-config.lua
 luafile $HOME/.config/nvim/plug-config/lspsaga-config.lua
-luafile $HOME/.config/nvim/plug-config/autopair-config.lua
+" luafile $HOME/.config/nvim/plug-config/autopair-config.lua
 luafile $HOME/.config/nvim/plug-config/comment-config.lua
-luafile $HOME/.config/nvim/plug-config/toggleterm-config.lua
+" luafile $HOME/.config/nvim/plug-config/toggleterm-config.lua
 luafile $HOME/.config/nvim/plug-config/neogit-config.lua
 " luafile $HOME/.config/nvim/plug-config/rust-config.lua
 " luafile $HOME/.config/nvim/plug-config/formattr-config.lua
@@ -183,34 +238,34 @@ nnoremap <silent><leader>ca :Lspsaga code_action<CR>
 nnoremap <silent><leader>cra :Lspsaga range_code_action<CR>
 nnoremap <silent><leader>rn :Lspsaga rename<CR>
 
-hi DiagnosticWarn guifg=#d8a657
-hi DiagnosticUnderlineError gui=undercurl
-hi DiagnosticUnderlineHint gui=undercurl guisp=#89b482
-hi DiagnosticUnderlineWarn gui=undercurl
-hi CursorLine guibg=None
-
-highlight! CmpPmenuBorder guifg=#7c6f64 guibg=#32302f
-highlight! CmpPmenu guibg=#32302f
-hi CmpItemKindEnum guifg=#d8a657
-hi CmpItemKindEnumMember guifg=#d8a657
-hi CmpItemKindClass guifg=#d8a657
-hi CmpItemKindStruct guifg=#d8a657
-hi CmpItemKindModule guifg=#d8a657
-hi CmpItemKindModule guifg=#d8a657
-hi CmpItemKindInterface guifg=#d8a657
-hi CmpItemKindConstant guifg=#d8a657
-hi CmpItemKindSnippet guifg=#d3869b
-hi CmpItemKindKeyword guifg=#d3869b
-hi CmpItemKindMethod guifg=#7daea3
-hi CmpItemKindFunction guifg=#7daea3
-hi CmpItemKindConstructor guifg=#7daea3
-hi CmpItemKindProperty guifg=#89b482
-hi CmpItemKindField guifg=#89b482
-hi CmpItemKindFolder guifg=#a9b665
-hi CmpItemKindFile guifg=#a9b665
-
-hi CmpItemAbbr guifg=#7c6f64
-hi PmenuSel guibg=#a9b665 guifg=#32302f
+" hi DiagnosticWarn guifg=#d8a657
+" hi DiagnosticUnderlineError gui=undercurl
+" hi DiagnosticUnderlineHint gui=undercurl guisp=#89b482
+" hi DiagnosticUnderlineWarn gui=undercurl
+" hi CursorLine guibg=None
+"
+" highlight! CmpPmenuBorder guifg=#7c6f64 guibg=#32302f
+" highlight! CmpPmenu guibg=#32302f
+" hi CmpItemKindEnum guifg=#d8a657
+" hi CmpItemKindEnumMember guifg=#d8a657
+" hi CmpItemKindClass guifg=#d8a657
+" hi CmpItemKindStruct guifg=#d8a657
+" hi CmpItemKindModule guifg=#d8a657
+" hi CmpItemKindModule guifg=#d8a657
+" hi CmpItemKindInterface guifg=#d8a657
+" hi CmpItemKindConstant guifg=#d8a657
+" hi CmpItemKindSnippet guifg=#d3869b
+" hi CmpItemKindKeyword guifg=#d3869b
+" hi CmpItemKindMethod guifg=#7daea3
+" hi CmpItemKindFunction guifg=#7daea3
+" hi CmpItemKindConstructor guifg=#7daea3
+" hi CmpItemKindProperty guifg=#89b482
+" hi CmpItemKindField guifg=#89b482
+" hi CmpItemKindFolder guifg=#a9b665
+" hi CmpItemKindFile guifg=#a9b665
+"
+" hi CmpItemAbbr guifg=#7c6f64
+" hi PmenuSel guibg=#a9b665 guifg=#32302f
 
 " highlight! CmpPmenuBorder guifg=#7a8478 guibg=#2b3339
 " highlight Cursor guifg=#7fbbb3
@@ -236,47 +291,50 @@ nnoremap <silent> <C-n> <cmd>Lspsaga diagnostic_jump_next<Cr>
 nnoremap <silent> <C-p> <cmd>Lspsaga diagnostic_jump_prev<Cr>
 
 
-hi SagaWinbarKey           guifg=#ea6962
-hi SagaWinbarEnum  guifg=#d8a657
-hi SagaWinbarFile         guifg=#a9b665
-hi SagaWinbarNull          guifg=#e78a4e
-hi SagaWinbarArray         guifg=#7daea3
-hi SagaWinbarClass        guifg=#d8a657
-hi SagaWinbarEvent         guifg=#7daea3
-hi SagaWinbarField         guifg=#89b482
-hi SagaWinbarMacro        guifg=#e78a4e
-hi SagaWinbarMethod        guifg=#89b482
-hi SagaWinbarModule       guifg=#d8a657
-hi SagaWinbarNumber        guifg=#e78a4e
-hi SagaWinbarObject       guifg=#d8a657
-hi SagaWinbarString        guifg=#a9b665
-hi SagaWinbarStruct       guifg=#d8a657
-hi SagaWinbarBoolean       guifg=#e78a4e
-hi SagaWinbarPackage       guifg=#e78a4e
-hi SagaWinbarConstant      guifg=#d8a657
-hi SagaWinbarFunction     guifg=#7daea3
-hi SagaWinbarOperator      guifg=#e78a4e
-hi SagaWinbarProperty      guifg=#89b482
-hi SagaWinbarVariable     guifg=#ea6962
-hi SagaWinbarInterface    guifg=#d8a657
-hi SagaWinbarNamespace    guifg=#d8a657
-hi SagaWinbarParameter     guifg=#89b482
-hi SagaWinbarTypeAlias     guifg=#d8a657
-hi SagaWinbarEnumMember   guifg=#d8a657
-hi SagaWinbarConstructor   guifg=#89b482
-hi SagaWinbarStaticMethod  guifg=#89b482
-hi SagaWinbarPreviewBorder guifg=#7c6f64
-hi SagaWinbarTypeParameter  guifg=#89b482
-hi SagaWinbarFilename       guifg=#d4be98
-hi SagaWinbarFoldername       guifg=#d4be98
-hi SagaWinbarSep            guifg=#7c6f64
-hi Title       guifg=#d4be98
+" hi SagaWinbarKey           guifg=#ea6962
+" hi SagaWinbarEnum  guifg=#d8a657
+" hi SagaWinbarFile         guifg=#a9b665
+" hi SagaWinbarNull          guifg=#e78a4e
+" hi SagaWinbarArray         guifg=#7daea3
+" hi SagaWinbarClass        guifg=#d8a657
+" hi SagaWinbarEvent         guifg=#7daea3
+" hi SagaWinbarField         guifg=#89b482
+" hi SagaWinbarMacro        guifg=#e78a4e
+" hi SagaWinbarMethod        guifg=#89b482
+" hi SagaWinbarModule       guifg=#d8a657
+" hi SagaWinbarNumber        guifg=#e78a4e
+" hi SagaWinbarObject       guifg=#d8a657
+" hi SagaWinbarString        guifg=#a9b665
+" hi SagaWinbarStruct       guifg=#d8a657
+" hi SagaWinbarBoolean       guifg=#e78a4e
+" hi SagaWinbarPackage       guifg=#e78a4e
+" hi SagaWinbarConstant      guifg=#d8a657
+" hi SagaWinbarFunction     guifg=#7daea3
+" hi SagaWinbarOperator      guifg=#e78a4e
+" hi SagaWinbarProperty      guifg=#89b482
+" hi SagaWinbarVariable     guifg=#ea6962
+" hi SagaWinbarInterface    guifg=#d8a657
+" hi SagaWinbarNamespace    guifg=#d8a657
+" hi SagaWinbarParameter     guifg=#89b482
+" hi SagaWinbarTypeAlias     guifg=#d8a657
+" hi SagaWinbarEnumMember   guifg=#d8a657
+" hi SagaWinbarConstructor   guifg=#89b482
+" hi SagaWinbarStaticMethod  guifg=#89b482
+" hi SagaWinbarPreviewBorder guifg=#7c6f64
+" hi SagaWinbarTypeParameter  guifg=#89b482
+" hi SagaWinbarFilename       guifg=#d4be98
+" hi SagaWinbarFoldername       guifg=#d4be98
+" hi SagaWinbarSep            guifg=#7c6f64
+" hi Title       guifg=#d4be98
 
 nnoremap <silent> gd :Lspsaga goto_definition<CR>
 nnoremap <silent> gr :Lspsaga lsp_finder<CR>
 
 nnoremap  <leader>ot :Lspsaga outline<CR>
-nnoremap \\ :ToggleTerm<CR>
+nnoremap \\ :ToggleTerm<CR> 
+
+nnoremap <silent> <leader>bw :write<CR>
+nnoremap <silent> <leader>bh :nohlsearch<CR>
 
 " leap nvim
 lua require('leap').add_default_mappings()

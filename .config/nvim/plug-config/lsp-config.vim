@@ -84,7 +84,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
    -- Enable virtual text only on Warning or above, override spacing to 2
    virtual_text = {
      spacing = 2,
-     severity_limit = "Error",
+     severity = {min = vim.diagnostic.severity.ERROR},
+     -- severity_limit = "Error",
    },
  }
 )
@@ -156,13 +157,20 @@ capabilities.textDocument.completion.completionItem = {
 --    },
 -- }
 
-local servers = { 'jedi_language_server', 'rust_analyzer', 'tsserver', 'clangd', 'emmet_ls', 'solidity_ls_nomicfoundation', 'texlab'}
+local servers = { 'jedi_language_server', 'rust_analyzer', 'ts_ls', 'emmet_ls', 'solidity_ls_nomicfoundation', 'texlab'}
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities
     }
 end
+
+-- clangd
+lspconfig['clangd'].setup{}
+
+-- verilog
+-- lspconfig['veridian'].setup{}
+lspconfig['verible'].setup{}
 
 -- solidity ls
 -- configs.solidity = {

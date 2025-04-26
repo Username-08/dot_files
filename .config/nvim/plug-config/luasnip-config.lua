@@ -1,1 +1,1 @@
-require("luasnip.loaders.from_vscode").lazy_load({include = {"html", "css", "rust"}}) -- Load only html and css snippets
+require("luasnip.loaders.from_vscode").lazy_load() -- Load only html and css snippets

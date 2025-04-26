@@ -235,11 +235,6 @@ ins_left {
 
 -- Add components to right sections
 ins_right {
-  require("noice").api.statusline.mode.get,
-  cond = require("noice").api.statusline.mode.has,
-  color = { fg = colors.fg},
-}
-ins_right {
   'o:encoding', -- option component same as &encoding in viml
   fmt = string.upper, -- I'm not sure why it's upper case either ;)
   cond = conditions.hide_in_width,
@@ -251,6 +246,22 @@ ins_right {
   fmt = string.upper,
   icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
   color = { fg = colors.gray, gui = 'bold' },
+}
+
+ins_right {
+  'searchcount',
+  color = { fg = colors.cyan},
+}
+
+ins_right {
+  '%S',
+  color = { fg = colors.orange},
+}
+
+ins_right {
+  require("noice").api.statusline.mode.get,
+  cond = require("noice").api.statusline.mode.has,
+  color = { fg = colors.fg},
 }
 
 ins_right {
@@ -282,7 +293,7 @@ ins_left {
   function()
     local msg = ''
     local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-    local clients = vim.lsp.get_active_clients()
+    local clients = vim.lsp.get_clients()
     if next(clients) == nil then
       return msg
     end

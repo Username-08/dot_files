@@ -32,6 +32,14 @@ saga.setup({
         border = "rounded",
     },
     beacon = {
-        frequency = 15,
+        frequency = 10,
     },
 })
+
+vim.keymap.set('n', 'gd', '<cmd>Lspsaga goto_definition<cr>', { silent = true })
+vim.keymap.set('n', 'gr', '<cmd>Lspsaga lsp_finder<cr>', { silent = true })
+vim.keymap.set('n', '<Leader>ot', '<cmd>Lspsaga outline<cr>', { silent = true })
+vim.keymap.set('n', '<leader>ob', '<cmd>Lspsaga winbar_toggle<cr>', { silent = true })
+
+vim.keymap.set('n', '<C-n>', '<cmd>Lspsaga diagnostic_jump_next<cr>', { silent = true })
+vim.keymap.set('n', '<C-p>', '<cmd>Lspsaga diagnostic_jump_prev<cr>', { silent = true })

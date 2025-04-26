@@ -13,6 +13,7 @@ require('telescope').setup{
           mappings = {
             ["i"] = {
               -- your custom insert mode mappings
+              ["<C-t>"] = actions.select_tab,
             },
             ["n"] = {
               -- your custom normal mode mappings
@@ -22,7 +23,7 @@ require('telescope').setup{
         undo = {};
       },
     defaults = {
-        file_ignore_patterns={"node_modules/.", "dist/.", "target/."},
+        file_ignore_patterns={"node_modules/.", "dist/.", "target/.", "bin/."},
         prompt_prefix = "  " .. "" .. "  ",
         selection_caret = " ❯ ",
         entry_prefix = "   ",
@@ -36,4 +37,5 @@ require('telescope').setup{
 
 require("telescope").load_extension "file_browser"
 require("telescope").load_extension("undo")
+require("telescope").load_extension("noice")
 EOF
