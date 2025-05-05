@@ -6,8 +6,8 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
-(setq user-full-name "Yash Ranjan"
-      user-mail-address "yashranjan08@proton.me")
+;; (setq user-full-name "John Doe"
+;;       user-mail-address "john@doe.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -15,7 +15,7 @@
 ;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
 ;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
 ;;   presentations or streaming.
-;; - `doom-unicode-font' -- for unicode glyphs
+;; - `doom-symbol-font' -- for symbols
 ;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
 ;;
 ;; See 'C-h v doom-font' for documentation and more examples of what they
@@ -33,6 +33,9 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'gruvbox-flat)
+(doom/set-frame-opacity 95)
+;; (set-face-attribute 'lsp-flycheck-warning-unnecessary-face nil
+;;                     :foreground "#7c6f64")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -75,84 +78,43 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 17 :weight 'medium))
+(setq doom-font (font-spec :family "JetBrainsMono NF" :size 17 :weight 'SemiBold))
 
-;; (global-tree-sitter-mode)
-;; (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
-;;
-;; (add-to-list 'load-path "~/.emacs.d/.local/straight/build-28.2/emacs-application-framework/")
-;; (require 'eaf)
-;; (require 'eaf-markdown-previewer)
-;; (require 'eaf-video-player)
-;; (require 'eaf-jupyter)
-;; (require 'eaf-browser)
-;; (require 'eaf-image-viewer)
-;; (require 'eaf-pdf-viewer)
-;; (require 'eaf-org-previewer)
-;; (require 'eaf-evil)
-;;
-;; (define-key key-translation-map (kbd "SPC")
-;;     (lambda (prompt)
-;;       (if (derived-mode-p 'eaf-mode)
-;;           (pcase eaf--buffer-app-name
-;;             ("browser" (if  (string= (eaf-call-sync "call_function" eaf--buffer-id "is_focus") "True")
-;;                            (kbd "SPC")
-;;                          (kbd eaf-evil-leader-key)))
-;;             ("pdf-viewer" (kbd eaf-evil-leader-key))
-;;             ("image-viewer" (kbd eaf-evil-leader-key))
-;;             (_  (kbd "SPC")))
-;;         (kbd "SPC"))))
-;;
-;; (setq browse-url-browser-function 'eaf-open-browser)
-;; (setq eaf-browser-enable-adblocker "true")
-;; (setq eaf-browser-continue-where-left-off t)
-;; (setq eaf-browser-default-search-engine "duckduckgo")
-;; (setq eaf-browse-blank-page-url "https://duckduckgo.com")
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
 
-;;(require 'company)
-;;(define-key company-active-map (kbd "SPC") 'company-complete-selection)
-;;(set 'company-auto-commit t)
-;;(setq company-auto-commit 'company-explicit-action-p)
+(setq treesit-font-lock-level 6)
 
-;;(setq dap-auto-configure-mode t)
-(require 'dap-cpptools)
+(after! evil-snipe
+  (setq evil-snipe-scope 'visible))
 
-(require 'projectile)
-(add-to-list 'projectile-project-root-files-bottom-up "Cargo.toml")
-(add-to-list 'projectile-project-root-files-bottom-up "tsconfig.json")
+;; lsp-booster
+;; (defun lsp-booster--advice-json-parse (old-fn &rest args)
+;;   "Try to parse bytecode instead of json."
+;;   (or
+;;    (when (equal (following-char) ?#)
+;;      (let ((bytecode (read (current-buffer))))
+;;        (when (byte-code-function-p bytecode)
+;;          (funcall bytecode))))
+;;    (apply old-fn args)))
+;; (advice-add (if (progn (require 'json)
+;;                        (fboundp 'json-parse-buffer))
+;;                 'json-parse-buffer
+;;               'json-read)
+;;             :around
+;;             #'lsp-booster--advice-json-parse)
 
-;; (require 'tree-sitter)
-;; (tree-sitter-hl-add-patterns 'rust
-;;   [( ["==" "=>" "->" ";" "(" ")" "{" "}" "[" "]" "<" ">" "=" "|" "&" "^" "." "," ":" "::" ">=" "<=" "!=" "+=" "-=" "*=" "/=" "/" "*" "-" "+"] @function.macro)] )
-;; (setq select-enable-clipboard nil)
-
-;; (require 'flycheck)
-;; (setq flycheck-check-syntax-automatically '(save mode-enabled))
-
-(require 'evil)
-(setq evil-insert-state-cursor '("#d2b48c" box))
-(setq evil-normal-state-cursor '("#d2b48c" box))
-(setq evil-visual-state-cursor '("#d2b48c" box))
-(setq evil-replace-state-cursor '("#d2b48c" box))
-(setq evil-emacs-state-cursor '("#d2b48c" box))
-(setq evil-motion-state-cursor '("#d2b48c" box))
-(setq evil-operator-state-cursor '("#d2b48c" box))
-
-;(defun company-box-doc--make-buffer (object)
-;  (let* ((buffer-list-update-hook nil)
-;         (inhibit-modification-hooks t)
-;         (string (cond ((stringp object) object)
-;                       ((bufferp object) (with-current-buffer object (buffer-string))))))
-;    (when (and string (> (length (string-trim string)) 0))
-;      (with-current-buffer (company-box--get-buffer "doc")
-;        (erase-buffer)
-;        (insert string)
-;        (setq mode-line-format nil
-;              display-line-numbers nil
-;              header-line-format nil
-;              show-trailing-whitespace nil
-;              cursor-in-non-selected-windows nil)
-;
-;        (toggle-truncate-lines -1) ;; PATCHED HERE
-;
-;        (current-buffer)))))
+;; (defun lsp-booster--advice-final-command (old-fn cmd &optional test?)
+;;   "Prepend emacs-lsp-booster command to lsp CMD."
+;;   (let ((orig-result (funcall old-fn cmd test?)))
+;;     (if (and (not test?)                             ;; for check lsp-server-present?
+;;              (not (file-remote-p default-directory)) ;; see lsp-resolve-final-command, it would add extra shell wrapper
+;;              lsp-use-plists
+;;              (not (functionp 'json-rpc-connection))  ;; native json-rpc
+;;              (executable-find "emacs-lsp-booster"))
+;;         (progn
+;;           (when-let ((command-from-exec-path (executable-find (car orig-result))))  ;; resolve command from exec-path (in case not found in $PATH)
+;;             (setcar orig-result command-from-exec-path))
+;;           (message "Using emacs-lsp-booster for %s!" orig-result)
+;;           (cons "emacs-lsp-booster" orig-result))
+;;       orig-result)))
+;; (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)

@@ -28,7 +28,7 @@ background contrast. All other values default to \"medium\"."
 
 ;;
 (def-doom-theme gruvbox-flat
-  "Dark theme with pastel 'retro groove' colors."
+    "Dark theme with pastel 'retro groove' colors."
 
   ;; name        gui       256       16
   ((bg
@@ -167,10 +167,11 @@ background contrast. All other values default to \"medium\"."
    (evil-snipe-first-match-face :foreground "white" :background yellow)
    (evil-snipe-matches-face     :foreground yellow :bold t :underline t)
    ;;;; flycheck
-   (flycheck-error   :underline `(:style wave :color ,red)    :background bg :foreground-color fg)
+   (flycheck-error   :underline `(:style wave :color ,green)    :background bg :foreground-color fg)
    (flycheck-warning :underline `(:style wave :color ,yellow) :background bg :foreground-color fg)
    (flycheck-info    :underline `(:style wave :color ,blue)   :background bg :foreground-color fg)
-   (lsp-lsp-flycheck-info-unnecessary-face :underline `(:style wave :color ,blue)   :background bg :foreground-color fg)
+   ;; (lsp-flycheck-info-unnecessary-face :underline `(:style wave :color ,blue)   :background bg :foreground-color fg)
+   (lsp-flycheck-warning-unnecessary-face :underline `(:style wave :color ,yellow) :background bg :foreground-color base5)
    ;;;; dired
    (dired-directory :foreground cyan)
    (dired-marked :foreground yellow)
@@ -227,12 +228,12 @@ background contrast. All other values default to \"medium\"."
    ((outline-6 &override) :foreground (doom-lighten violet 0.4))
    ((outline-7 &override) :foreground (doom-lighten dark-cyan 0.5))
    ((outline-8 &override) :foreground (doom-lighten violet 0.6))
-   ; ((outline-1 &override) :foreground green)
-   ; ((outline-2 &override) :foreground green)
-   ; ((outline-3 &override) :foreground yellow)
-   ; ((outline-4 &override) :foreground yellow)
-   ; ((outline-5 &override) :foreground dark-yellow)
-   ; ((outline-6 &override) :foreground dark-yellow)
+                                        ; ((outline-1 &override) :foreground green)
+                                        ; ((outline-2 &override) :foreground green)
+                                        ; ((outline-3 &override) :foreground yellow)
+                                        ; ((outline-4 &override) :foreground yellow)
+                                        ; ((outline-5 &override) :foreground dark-yellow)
+                                        ; ((outline-6 &override) :foreground dark-yellow)
    ;;;; org <built-in>
    ((org-code &override) :foreground orange)
    (org-date :foreground green)
@@ -243,13 +244,13 @@ background contrast. All other values default to \"medium\"."
    (org-formula :foreground green)
    (org-meta-line :foreground comments)
    (org-list-dt :foreground cyan)
-   ; (org-list-dt :foreground yellow)
+                                        ; (org-list-dt :foreground yellow)
    ((org-quote &override) :inherit 'italic :foreground base7 :background org-quote)
    (org-table :foreground cyan)
    (org-tag :foreground (doom-darken comments 0.15) :weight 'normal)
-   ; (org-tag :foreground yellow :bold nil)
+                                        ; (org-tag :foreground yellow :bold nil)
    (org-todo :foreground green :bold 'inherit)
-   ; (org-todo :foreground yellow :bold 'inherit)
+                                        ; (org-todo :foreground yellow :bold 'inherit)
    (org-verbatim :foreground yellow)
    ;;;; rainbow-delimiters
    (rainbow-delimiters-depth-1-face :foreground orange)
