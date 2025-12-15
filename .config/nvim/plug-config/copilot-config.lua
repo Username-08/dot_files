@@ -3,7 +3,3 @@ require("copilot").setup({
   panel = { enabled = false },
 })
 require("copilot_cmp").setup()
-require("CopilotChat").setup {
-  debug = true, -- Enable debugging
-  -- See Configuration section for rest
-}

@@ -37,6 +37,7 @@ autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2 smartindent
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2 smartindent
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2 smartindent
 autocmd FileType verilog setlocal shiftwidth=2 tabstop=2 softtabstop=2 smartindent
+autocmd FileType systemverilog setlocal shiftwidth=2 tabstop=2 softtabstop=2 smartindent
 autocmd FileType nasm highlight nasmGen32Register guifg=#89b482
 autocmd FileType nasm highlight nasmGen64Register guifg=#89b482
 au BufRead,BufNewFile *.graphql,*.graphqls,*.gql setfiletype graphql
@@ -59,13 +60,20 @@ nmap \w :w<CR>
 
 call plug#begin('~/.vim/plugged')
 
-" org-mode
-Plug 'nvim-orgmode/orgmode', { 'on': [] }
-Plug 'chipsenkbeil/org-roam.nvim', { 'on': [] }
+" auto-session
+Plug 'https://github.com/rmagatti/auto-session'
 
+" grug-far
+Plug 'MagicDuck/grug-far.nvim', { 'on': [] }
+
+" org-mode
+" Plug 'nvim-orgmode/orgmode', { 'on': [] , 'for': ['org']}
+" Plug 'chipsenkbeil/org-roam.nvim', { 'on': [] }
+
+" AI
+Plug 'olimorris/codecompanion.nvim', { 'on': [] }
 " copilot
 Plug 'zbirenbaum/copilot.lua', { 'on': [] }
-Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'on': [] }
 Plug 'zbirenbaum/copilot-cmp', { 'on': [] }
 
 Plug 'folke/noice.nvim'
@@ -121,7 +129,9 @@ Plug 'hoob3rt/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'glepnir/lspsaga.nvim'
 Plug 'sbdchd/neoformat'
+
 Plug 'NeogitOrg/neogit'
+Plug 'sindrets/diffview.nvim'
 
 " Plug 'andweeb/presence.nvim'
 " Plug 'pangloss/vim-javascript'
@@ -144,22 +154,29 @@ augroup lazy_load
     autocmd VimEnter * call LazyLoad()
     
     function LazyLoad()
-        call plug#load('orgmode', 'org-roam.nvim')
-        luafile $HOME/.config/nvim/plug-config/orgmode-config.lua
-
-        call plug#load('copilot.lua', 'CopilotChat.nvim', 'copilot-cmp')
-        luafile $HOME/.config/nvim/plug-config/copilot-config.lua
-
         call plug#load('nvim-treesitter', 'playground', 'nvim-treesitter-textobjects')
         luafile $HOME/.config/nvim/plug-config/treesitter-config.lua
+
+        call plug#load('copilot.lua', 'copilot-cmp')
+        luafile $HOME/.config/nvim/plug-config/copilot-config.lua
+
 
         call plug#load('cmp-nvim-lsp', 'nvim-cmp', 'cmp-buffer')
         call plug#load('cmp-path', 'cmp-cmdline')
         call plug#load('friendly-snippets', 'LuaSnip', 'cmp_luasnip')
         luafile $HOME/.config/nvim/plug-config/nvim-cmp.lua
 
+        call plug#load('codecompanion.nvim')
+        luafile $HOME/.config/nvim/plug-config/codecompanion-config.lua
+
         call plug#load('nvim-autopairs')
         luafile $HOME/.config/nvim/plug-config/autopair-config.lua
+
+        " call plug#load('orgmode', 'org-roam.nvim')
+        " luafile $HOME/.config/nvim/plug-config/orgmode-config.lua
+
+        call plug#load('grug-far.nvim')
+        luafile $HOME/.config/nvim/plug-config/grug-far-config.lua
 
         call plug#load('nvim-dap', 'nvim-dap-ui', 'nvim-nio')
         luafile $HOME/.config/nvim/plug-config/dap-config.lua
@@ -186,6 +203,9 @@ let g:gruvbox_material_transparent_background = 1
 " colorscheme everforest
 
 
+" diff
+set diffopt+=vertical
+
 " set splitbelow
 set switchbuf=newtab
 " source $HOME/.config/nvim/plug-config/coc.vim
@@ -198,6 +218,7 @@ source $HOME/.config/nvim/plug-config/vimtex.rc.vim
 
 " luafile $HOME/.config/nvim/plug-config/treesitter-config.lua
 luafile $HOME/.config/nvim/plug-config/gitconflict.lua
+luafile $HOME/.config/nvim/plug-config/auto-session-config.lua
 
 " luafile $HOME/.config/nvim/plug-config/compe-config.lua
 " luafile $HOME/.config/nvim/plug-config/luasnip-config.lua
@@ -338,6 +359,7 @@ nnoremap <silent> <leader>bh :nohlsearch<CR>
 
 " leap nvim
 lua require('leap').add_default_mappings()
+noremap <silent> gS :lua require('leap.remote').action()<CR>
 hi LeapMatch      cterm=underline,nocombine ctermfg=9 gui=underline,nocombine guifg=#a9b665
 hi LeapLabelPrimary cterm=nocombine ctermfg=0 ctermbg=9 gui=nocombine guifg=Black guibg=#89b482
 

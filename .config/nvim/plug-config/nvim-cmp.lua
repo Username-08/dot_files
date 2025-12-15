@@ -85,13 +85,14 @@ cmp.setup({
   },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
+    { name = 'orgmode' },
     -- { name = 'vsnip' }, -- For vsnip users.
     { name = 'luasnip' }, -- For luasnip users.
     -- { name = 'ultisnips' }, -- For ultisnips users.
     -- { name = 'snippy' }, -- For snippy users.
     { name = "copilot", group_index = 2 },
     { name = "path" },
-    { name = "orgmode" },
+    { name = "codecompaion" },
   }, {
     { name = 'buffer' },
   }),

@@ -16,9 +16,9 @@ let g:neoformat_enabled_c = ['clang_format']
 let g:neoformat_enabled_C = ['clang_format']
 let g:neoformat_enabled_cpp = ['clang_format']
 let g:neoformat_enabled_rust = ['rustfmt']
-augroup fmt
-  autocmd!
-  " autocmd BufWritePre * undojoin | Neoformat
-  autocmd BufWritePre * | Neoformat
-augroup END
+" augroup fmt
+"   autocmd!
+"   " autocmd BufWritePre * undojoin | Neoformat
+"   autocmd BufWritePre * | Neoformat
+" augroup END
 
