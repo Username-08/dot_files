@@ -197,7 +197,7 @@ ins_left {
   color = get_color,
 }
 
-ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
+ins_left { 'location', color = { fg = colors.fg, gui = 'bold' } }
 
 -- ins_left { 
 --   'location',

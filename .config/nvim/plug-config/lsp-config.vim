@@ -69,13 +69,126 @@ nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
 "
 
 lua << EOF 
-local present, lspconfig = pcall(require, "lspconfig")
+-- local present, lspconfig = pcall(require, "lspconfig")
+-- 
+-- if not present then
+--    return
+-- end
+-- 
+-- local M = {}
+-- 
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+--  vim.lsp.diagnostic.on_publish_diagnostics, {
+--    -- Enable underline, use default values
+--    underline = true,
+--    -- Enable virtual text only on Warning or above, override spacing to 2
+--    virtual_text = {
+--      spacing = 2,
+--      severity = {min = vim.diagnostic.severity.ERROR},
+--      -- severity_limit = "Error",
+--    },
+--  }
+-- )
+-- 
+-- local signs = { Error = "ᐅ", Warn = "ᐅ", Hint = "", Info = "" }
+-- for type, icon in pairs(signs) do
+--   local hl = "DiagnosticSign" .. type
+--   vim.fn.sign_define(hl, { text = icon, texthl = hl})
+-- end
+-- 
+-- -- Borders for LspInfo winodw
+-- local win = require "lspconfig.ui.windows"
+-- local _default_opts = win.default_opts
+-- 
+-- win.default_opts = function(options)
+--    local opts = _default_opts(options)
+--    opts.border = "single"
+--    return opts
+-- end
+-- 
+-- M.on_attach = function(client, bufnr)
+--    client.resolved_capabilities.document_formatting = false
+--    client.resolved_capabilities.document_range_formatting = false
+--    client.server_capabilities.semanticTokensProvider = nil
+-- 
+-- 
+--    lsp_mappings[1]["mode_opts"] = { buffer = bufnr }
+-- 
+-- end
+-- 
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- 
+-- capabilities.textDocument.completion.completionItem = {
+--    documentationFormat = { "markdown", "plaintext" },
+--    snippetSupport = true,
+--    preselectSupport = true,
+--    insertReplaceSupport = true,
+--    labelDetailsSupport = true,
+--    deprecatedSupport = true,
+--    commitCharactersSupport = true,
+--    tagSupport = { valueSet = { 1 } },
+--    resolveSupport = {
+--       properties = {
+--          "documentation",
+--          "detail",
+--          "additionalTextEdits",
+--       },
+--    },
+-- }
+-- 
+-- -- lspconfig.sumneko_lua.setup {
+-- --    on_attach = M.on_attach,
+-- --    capabilities = capabilities,
+-- -- 
+-- --    settings = {
+-- --       Lua = {
+-- --          diagnostics = {
+-- --             globals = { "vim", "nvchad" },
+-- --          },
+-- --          workspace = {
+-- --             library = {
+-- --                [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+-- --                [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+-- --             },
+-- --             maxPreload = 100000,
+-- --             preloadFileSize = 10000,
+-- --          },
+-- --       },
+-- --    },
+-- -- }
+-- 
+-- local servers = { 'jedi_language_server', 'rust_analyzer', 'ts_ls', 'emmet_ls', 'solidity_ls_nomicfoundation', 'texlab'}
+-- for _, lsp in pairs(servers) do
+--   lspconfig[lsp].setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities
+--     }
+-- end
+-- 
+-- -- clangd
+-- lspconfig['clangd'].setup{}
+-- 
+-- -- verilog
+-- -- lspconfig['veridian'].setup{}
+-- lspconfig['verible'].setup{}
 
-if not present then
-   return
-end
+-- solidity ls
+-- configs.solidity = {
+--   default_config = {
+--     cmd = {'nomicfoundation-solidity-language-server', '--stdio'},
+--     filetypes = { 'solidity' },
+--     root_dir = lspconfig.util.find_git_ancestor,
+--     single_file_support = true,
+--   },
+-- }
+-- lspconfig.solidity.setup {}
+-- requires a file containing user's lspconfigs
 
-local M = {}
+-- for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
+--  vim.api.nvim_set_hl(0, group, {})
+-- end
+-- 
+-- return M
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
  vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -96,96 +209,17 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl})
 end
 
--- Borders for LspInfo winodw
-local win = require "lspconfig.ui.windows"
-local _default_opts = win.default_opts
+local servers = { 'jedi_language_server', 'rust_analyzer', 'ts_ls', 'emmet_ls', 'solidity_ls_nomicfoundation', 'texlab', 'clangd', 'verible' }
 
-win.default_opts = function(options)
-   local opts = _default_opts(options)
-   opts.border = "single"
-   return opts
+vim.lsp.config('clangd', {
+    capabilities = {
+        textDocument = {
+            semanticTokens = vim.NIL,
+        },
+    },
+})
+
+for _, lsp in ipairs(servers) do
+    vim.lsp.enable(lsp)
 end
-
-M.on_attach = function(client, bufnr)
-   client.resolved_capabilities.document_formatting = false
-   client.resolved_capabilities.document_range_formatting = false
-   client.server_capabilities.semanticTokensProvider = nil
-
-
-   lsp_mappings[1]["mode_opts"] = { buffer = bufnr }
-
-end
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-capabilities.textDocument.completion.completionItem = {
-   documentationFormat = { "markdown", "plaintext" },
-   snippetSupport = true,
-   preselectSupport = true,
-   insertReplaceSupport = true,
-   labelDetailsSupport = true,
-   deprecatedSupport = true,
-   commitCharactersSupport = true,
-   tagSupport = { valueSet = { 1 } },
-   resolveSupport = {
-      properties = {
-         "documentation",
-         "detail",
-         "additionalTextEdits",
-      },
-   },
-}
-
--- lspconfig.sumneko_lua.setup {
---    on_attach = M.on_attach,
---    capabilities = capabilities,
--- 
---    settings = {
---       Lua = {
---          diagnostics = {
---             globals = { "vim", "nvchad" },
---          },
---          workspace = {
---             library = {
---                [vim.fn.expand "$VIMRUNTIME/lua"] = true,
---                [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
---             },
---             maxPreload = 100000,
---             preloadFileSize = 10000,
---          },
---       },
---    },
--- }
-
-local servers = { 'jedi_language_server', 'rust_analyzer', 'ts_ls', 'emmet_ls', 'solidity_ls_nomicfoundation', 'texlab'}
-for _, lsp in pairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-    }
-end
-
--- clangd
-lspconfig['clangd'].setup{}
-
--- verilog
--- lspconfig['veridian'].setup{}
-lspconfig['verible'].setup{}
-
--- solidity ls
--- configs.solidity = {
---   default_config = {
---     cmd = {'nomicfoundation-solidity-language-server', '--stdio'},
---     filetypes = { 'solidity' },
---     root_dir = lspconfig.util.find_git_ancestor,
---     single_file_support = true,
---   },
--- }
--- lspconfig.solidity.setup {}
--- requires a file containing user's lspconfigs
-
-for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
- vim.api.nvim_set_hl(0, group, {})
-end
-
-return M
+EOF

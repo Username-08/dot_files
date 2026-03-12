@@ -1,5 +1,6 @@
 lua<<EOF
 vim.loader.enable()
+vim.opt.winborder = "rounded"
 EOF
 
 set encoding=utf-8
@@ -14,10 +15,12 @@ set hidden
 set autoread
 set mouse=a
 set guicursor=n-v-c-i-sm:block,r-cr-o:hor20
+set ignorecase
+set smartcase
+" set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions
+
 
 set nofoldenable
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
 
 set cursorline
 hi CursorLineNr guifg=#d3869b
@@ -25,19 +28,20 @@ hi CursorLineNr guifg=#d3869b
 " tnoremap <Esc> <C-\><C-n>
 
 set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set softtabstop=0
+set shiftwidth=0
 
 " set up indentations for each filetype
-autocmd FileType cpp setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType lua setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType typescriptreact setlocal shiftwidth=2 tabstop=2 softtabstop=2 smartindent
-autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2 smartindent
-autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2 smartindent
-autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2 smartindent
-autocmd FileType verilog setlocal shiftwidth=2 tabstop=2 softtabstop=2 smartindent
-autocmd FileType systemverilog setlocal shiftwidth=2 tabstop=2 softtabstop=2 smartindent
+autocmd FileType cpp setlocal shiftwidth=0 tabstop=2 softtabstop=2
+autocmd FileType lua setlocal shiftwidth=0 tabstop=2 softtabstop=2
+autocmd FileType typescript setlocal shiftwidth=0 tabstop=2 softtabstop=2
+autocmd FileType typescriptreact setlocal shiftwidth=0 tabstop=2 softtabstop=2 smartindent
+autocmd FileType css setlocal shiftwidth=0 tabstop=2 softtabstop=2 smartindent
+autocmd FileType html setlocal shiftwidth=0 tabstop=2 softtabstop=2 smartindent
+autocmd FileType javascript setlocal shiftwidth=0 tabstop=2 softtabstop=2 smartindent
+autocmd FileType verilog setlocal shiftwidth=0 tabstop=2 softtabstop=2 smartindent
+autocmd FileType systemverilog setlocal shiftwidth=0 tabstop=2 softtabstop=2 smartindent
+autocmd FileType qml setlocal shiftwidth=0 tabstop=2 softtabstop=2 smartindent
 autocmd FileType nasm highlight nasmGen32Register guifg=#89b482
 autocmd FileType nasm highlight nasmGen64Register guifg=#89b482
 au BufRead,BufNewFile *.graphql,*.graphqls,*.gql setfiletype graphql
@@ -116,8 +120,7 @@ Plug 'hrsh7th/cmp-path', { 'on': [] }
 Plug 'hrsh7th/cmp-cmdline', { 'on': [] }
 
 Plug 'nvim-treesitter/nvim-treesitter', { 'on': [] }
-Plug 'nvim-treesitter/playground', { 'on': [] }
-Plug 'nvim-treesitter/nvim-treesitter-textobjects', { 'on': [] }
+Plug 'nvim-treesitter/nvim-treesitter-textobjects', { 'branch': 'main', 'on': [] }
 
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -154,7 +157,8 @@ augroup lazy_load
     autocmd VimEnter * call LazyLoad()
     
     function LazyLoad()
-        call plug#load('nvim-treesitter', 'playground', 'nvim-treesitter-textobjects')
+        call plug#load('nvim-treesitter', 'nvim-treesitter-textobjects')
+        " call plug#load('nvim-treesitter')
         luafile $HOME/.config/nvim/plug-config/treesitter-config.lua
 
         call plug#load('copilot.lua', 'copilot-cmp')
@@ -209,6 +213,7 @@ set diffopt+=vertical
 " set splitbelow
 set switchbuf=newtab
 " source $HOME/.config/nvim/plug-config/coc.vim
+luafile $HOME/.config/nvim/plug-config/auto-session-config.lua
 luafile $HOME/.config/nvim/plug-config/noice-config.lua
 luafile $HOME/.config/nvim/plug-config/nonicons-config.lua
 source $HOME/.config/nvim/plug-config/telescope-config.rc.vim
@@ -218,7 +223,6 @@ source $HOME/.config/nvim/plug-config/vimtex.rc.vim
 
 " luafile $HOME/.config/nvim/plug-config/treesitter-config.lua
 luafile $HOME/.config/nvim/plug-config/gitconflict.lua
-luafile $HOME/.config/nvim/plug-config/auto-session-config.lua
 
 " luafile $HOME/.config/nvim/plug-config/compe-config.lua
 " luafile $HOME/.config/nvim/plug-config/luasnip-config.lua
@@ -351,15 +355,21 @@ nnoremap <silent> <C-p> <cmd>Lspsaga diagnostic_jump_prev<Cr>
 nnoremap <silent> gd :Lspsaga goto_definition<CR>
 nnoremap <silent> gr :Lspsaga lsp_finder<CR>
 
-nnoremap  <leader>ot :Lspsaga outline<CR>
+nnoremap  <silent> <leader>ot :Lspsaga outline<CR>
 nnoremap \\ :ToggleTerm<CR> 
 
 nnoremap <silent> <leader>bw :write<CR>
 nnoremap <silent> <leader>bh :nohlsearch<CR>
 
 " leap nvim
-lua require('leap').add_default_mappings()
-noremap <silent> gS :lua require('leap.remote').action()<CR>
+lua << EOF
+vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap-forward)')
+vim.keymap.set('n',             'S', '<Plug>(leap-backward)')
+vim.keymap.set('n',             'gs', '<Plug>(leap-from-window)')
+vim.keymap.set({'n', 'x', 'o'}, 'gS', function ()
+  require('leap.remote').action()
+end)
+EOF
 hi LeapMatch      cterm=underline,nocombine ctermfg=9 gui=underline,nocombine guifg=#a9b665
 hi LeapLabelPrimary cterm=nocombine ctermfg=0 ctermbg=9 gui=nocombine guifg=Black guibg=#89b482
 
